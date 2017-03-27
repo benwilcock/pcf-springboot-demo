@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<title>Hello World</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/stylesheet.css">
+<body class="w3-content" style="max-width:1300px">
+
+<div class="w3-row">
+    <div class="w3-green w3-container w3-center" style="height:60px" id="header">
+        <div class="w3-padding-12">
+            <h3>Spring Boot Demo Project</h3>
+        </div>
+    </div>
+</div>
+
+<!-- First Grid: Logo & About -->
+<div class="w3-row">
+    <div class="w3-half w3-black w3-container w3-center" style="height:700px" id="standard">
+        <div class="w3-padding-64">
+            <h1>Actuator Standard Endpoints</h1>
+        </div>
+        <div class="w3-padding-64">
+            <a href="/info" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">/Info</a>
+            <a href="/health" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">/Health</a>
+        </div>
+    </div>
+    <div class="w3-half w3-blue-grey w3-container w3-center" style="height:700px" id="secured">
+        <div class="w3-padding-64">
+            <h1>Actuator Secured Endpoints</h1>
+        </div>
+        <div class="w3-left-align w3-padding-64">
+            <a href="/env" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Env</a>
+            <a href="/configprops" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/ConfigProps</a>
+            <a href="/beans" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Beans</a>
+            <a href="/metrics" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Metrics</a>
+            <a href="/loggers" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Loggers</a>
+            <a href="/trace" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Trace</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- Third Grid: Swing By & Contact -->
+<div class="w3-row">
+    <div class="w3-half w3-dark-grey w3-container w3-center" style="height:800px" id="tips">
+        <div class="w3-padding-64">
+            <h1>Tips</h1>
+        </div>
+        <div class="w3-padding-64">
+            <p>Use <pre>management.security.enabled=false</pre> in your <pre>application.properties</pre> to turn off the management API security.</p>
+        </div>
+    </div>
+    <div class="w3-half w3-light-grey w3-center" style="min-height:800px" id="props">
+        <div class="w3-padding-64">
+            <h2>Properties</h2>
+            <p>Set these in your <pre>application.properties</pre> for more interesting output in the <pre>/info</pre> endpoint...</p>
+        </div>
+        <pre>info.os = ${os.name}
+info.port = ${local.server.port}
+info.javaName = ${java.runtime.name}
+info.javaVmName = ${java.vm.name}
+info.javaVersion = ${java.runtime.version}
+info.profiles = ${profiles}
+info.applicationIndex = ${INSTANCE_INDEX}
+info.managementSecurityEnabled = ${management.security.enabled}
+info.services-messaging = ${vcap.services.rabbit.name}
+info.services-database = ${vcap.services.mysql.name}
+info.applicationName = ${vcap.application.name}
+info.applicationSpace = ${vcap.application.space_name}
+info.applicationUri = ${vcap.application.uris}
+info.applicationMemoryLimit = ${vcap.application.limits.mem}
+info.applicationStorageLimit = ${vcap.application.limits.disk}
+info.cloudControllerApiUrl = ${cloud.application.cf_api}
+        </pre>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="w3-container w3-black w3-padding-16">
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+</body>
+
+</html>

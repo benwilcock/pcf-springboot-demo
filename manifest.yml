@@ -1,0 +1,8 @@
+applications:
+- name: pcf-demo
+  memory: 256M
+  disk_quota: 256M
+  path: build/libs/pcf-sb-data-amqp-demo-0.0.1-SNAPSHOT.jar
+  services:
+  - rabbit
+  - mysql
