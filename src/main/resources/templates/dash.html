@@ -7,5 +7,6 @@
 <body>
 <p th:text="'Hello, ' + ${name} + '!'" />
 <p th:text="'Port: ' + ${port}" />
+<p th:text="'Port: ' + ${@environment.getProperty('local.server.port')}" />
 </body>
 </html>

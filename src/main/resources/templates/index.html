@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<title>Welcome</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" href="/stylesheet.css"/>
+<body class="w3-content" style="max-width:1300px">
+
+<div class="w3-row">
+    <div class="w3-green w3-container w3-center" style="height:100px" id="header">
+        <div class="w3-padding-12">
+            <h3 th:text="'PCF Spring Boot Demo: ' + ${@environment.getProperty('local.server.port')}" />
+        </div>
+    </div>
+</div>
+
+<!-- First Grid: Actuator Endpoints -->
+<div class="w3-row">
+    <div class="w3-half w3-black w3-container w3-center" style="height:700px" id="standard">
+        <div class="w3-padding-64">
+            <h1>Actuator (Standard)</h1>
+        </div>
+        <div class="w3-center">
+            <a href="/info" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">/Info</a>
+            <a href="/health" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">/Health</a>
+        </div>
+        <div class="w3-center w3-padding-32">
+            <small><p>To disable Actuator security, set <pre>management.security.enabled=false</pre> in <pre>application.properties</pre>.</p></small>
+        </div>
+    </div>
+    <div class="w3-half w3-blue-grey w3-container w3-center" style="height:700px" id="secured">
+        <div class="w3-padding-64">
+            <H1 th:text="'Actuator (Secured = ' + ${@environment.getProperty('management.security.enabled')} + ')'"/>
+        </div>
+        <div class="w3-center">
+            <a href="/env" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Env</a>
+            <a href="/configprops" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/ConfigProps</a>
+            <a href="/beans" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Beans</a>
+            <a href="/metrics" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Metrics</a>
+            <a href="/loggers" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Loggers</a>
+            <a href="/trace" class="w3-button w3-blue-grey w3-block w3-hover-dark-grey w3-padding-16">/Trace</a>
+        </div>
+    </div>
+</div>
+
+<!-- Second Grid: Configuration Tips -->
+<div class="w3-row">
+    <div class="w3-half w3-dark-grey w3-container w3-center" style="height:700px" id="app">
+        <div class="w3-padding-64">
+            <h1>Application Info</h1>
+        </div>
+        <div class="w3-center">
+            <p th:text="'Spring App Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
+            <p th:text="'Port: ' + ${@environment.getProperty('local.server.port')}"/>
+            <p th:text="'OS: ' + ${@environment.getProperty('os.name')}"/>
+            <p th:text="'Runtime: ' + ${@environment.getProperty('java.runtime.name')}"/>
+            <p th:text="'Variant: ' + ${@environment.getProperty('java.vm.name')}"/>
+            <p th:text="'Version: ' + ${@environment.getProperty('java.runtime.version')}"/>
+        </div>
+    </div>
+    <div class="w3-half w3-light-grey w3-center" style="min-height:700px" id="pcf">
+        <div class="w3-padding-64">
+            <h1>Cloud Foundry Info</h1>
+        </div>
+        <div class="w3-center">
+            <p th:text="'Foundation: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
+            <p th:text="'App Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
+            <p th:text="'App Id: ' + ${@environment.getProperty('INSTANCE_GUID')}"/>
+            <p th:text="'App Index: ' + ${@environment.getProperty('INSTANCE_INDEX')}"/>
+            <p th:text="'App Space: ' + ${@environment.getProperty('vcap.application.space_name')}"/>
+            <p th:text="'App URI: ' + ${@environment.getProperty('vcap.application.uris')}"/>
+            <p th:text="'App Memory: ' + ${@environment.getProperty('vcap.application.limits.mem')}"/>
+            <p th:text="'App Storage: ' + ${@environment.getProperty('vcap.application.limits.disk')} + ' (ephem)'"/>
+        </div>
+    </div>
+</div>
+
+</body>
+<!-- Footer -->
+<footer class="w3-container w3-black w3-padding-16">
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+</html>
