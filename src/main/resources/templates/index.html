@@ -51,11 +51,14 @@
         </div>
         <div class="w3-center">
             <p th:text="'Spring App Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
+            <!--<p th:text="'Version: ' + ${@environment.getProperty('build.version')}"/>-->
             <p th:text="'Port: ' + ${@environment.getProperty('local.server.port')}"/>
             <p th:text="'OS: ' + ${@environment.getProperty('os.name')}"/>
             <p th:text="'Runtime: ' + ${@environment.getProperty('java.runtime.name')}"/>
             <p th:text="'Variant: ' + ${@environment.getProperty('java.vm.name')}"/>
             <p th:text="'Version: ' + ${@environment.getProperty('java.runtime.version')}"/>
+            <p th:text="'Has Database: ' + ${@environment.getProperty('info.hasdatabase')}"/>
+            <p th:text="'Has Messaging: ' + ${@environment.getProperty('info.hasdatabase')}"/>
         </div>
     </div>
     <div class="w3-half w3-light-grey w3-center" style="min-height:700px" id="pcf">
