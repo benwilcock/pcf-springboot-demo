@@ -1,8 +1,5 @@
 applications:
-- name: pcf-demo
+- name: pcf-springboot-demo
   memory: 256M
   disk_quota: 256M
   path: build/libs/pcf-springboot-demo-0.0.1-SNAPSHOT.jar
-  services:
-  - rabbit
-  - mysql

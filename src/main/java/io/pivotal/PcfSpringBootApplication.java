@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.info.BuildProperties;
+import org.springframework.boot.info.GitProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
@@ -114,6 +116,9 @@ public class PcfSpringBootApplication {
         @Autowired
         Status status;
 
+        @Autowired
+        GitProperties gitProperties;
+
         /**
          * These properties will show up in Spring Boot Actuator's /info endpoint
          **/
@@ -122,6 +127,7 @@ public class PcfSpringBootApplication {
 
             // Add the status to the /info endpoint using Properties
             Properties props = new Properties();
+
 
             // Add the basic status of the resources
             props.put("info.hasdatabase", status.hasDatabase());

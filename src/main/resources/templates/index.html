@@ -51,7 +51,10 @@
         </div>
         <div class="w3-center">
             <p th:text="'Spring App Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
-            <!--<p th:text="'Version: ' + ${@environment.getProperty('build.version')}"/>-->
+            <p th:text="'Version: ' + ${@buildProperties.getVersion()}"/>
+            <p th:text="'Build Date: ' + ${@buildProperties.getTime()}"/>
+            <p th:text="'Branch: ' + ${@gitProperties.getBranch()}"/>
+            <p th:text="'CommitId: ' + ${@gitProperties.getCommitId()}"/>
             <p th:text="'Port: ' + ${@environment.getProperty('local.server.port')}"/>
             <p th:text="'OS: ' + ${@environment.getProperty('os.name')}"/>
             <p th:text="'Runtime: ' + ${@environment.getProperty('java.runtime.name')}"/>
