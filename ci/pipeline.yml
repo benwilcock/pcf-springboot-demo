@@ -1,10 +1,10 @@
 ---
-# resource_types:
-# - name: slack-notification
-#   type: docker-image
-#   source:
-#     repository: cfcommunity/slack-notification-resource
-#     tag: latest
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
 
 resources:
 - name: pcf-springboot-demo-source
@@ -22,21 +22,23 @@ resources:
     organization: {{cf-org}}
     space: {{cf-space}}
 
-# - name: 6h
-#   type: time
-#   source: {interval: 6h}
+- name: 24h
+  type: time
+  source: {interval: 24h}
 
-# - name: slack-alert
-#   type: slack-notification
-#   source:
-#     url: {{webhook}}
-#     insecure: true
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: {{webhook}}
+    insecure: true
 
 jobs:
 - name: test
   public: true
   plan:
   - get: pcf-springboot-demo-source
+    trigger: true
+  - get: 24h
     trigger: true
   - task: test
     file: pcf-springboot-demo-source/ci/tasks/test.yml
@@ -47,16 +49,15 @@ jobs:
   - get: pcf-springboot-demo-source
     trigger: true
     passed: [test]
+  - get: 24h
+    trigger: true
+    passed: [test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
   - put: cf-deploy-pcf-springboot-demo
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
-  # - put: slack-alert
-  #   params:
-  #     text: |
-  #       $BUILD_PIPELINE_NAME has been deployed
 
 - name: smoke_test
   public: true
@@ -64,11 +65,14 @@ jobs:
   - get: pcf-springboot-demo-source
     trigger: true
     passed: [deploy]
+  - get: 24h
+    trigger: true
+    passed: [deploy]
   - task: smoke_test
     file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
     params:
       URL: {{smoke-test-url}}
-#   - put: slack-alert
-#     params:
-#       text: |
-#         The smoke test for $BUILD_PIPELINE_NAME has passed.
+  - put: slack-alert
+    params:
+      text: |
+        The smoke test for $BUILD_PIPELINE_NAME has passed.
