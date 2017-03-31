@@ -27,7 +27,7 @@ repositories {
 
 
 dependencies {
-	//springBoot
+	//Build
 	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	compile("org.springframework.boot:spring-boot-devtools")
 	compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -35,6 +35,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile('org.springframework.boot:spring-boot-starter-web')
+
+	//Test
+	testCompile("com.h2database:h2")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
