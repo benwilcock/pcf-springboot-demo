@@ -1,10 +1,10 @@
 ---
-# resource_types:
-# - name: slack-notification
-#   type: docker-image
-#   source:
-#     repository: cfcommunity/slack-notification-resource
-#     tag: latest
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
 
 resources:
 - name: pcf-springboot-demo-source
@@ -26,11 +26,11 @@ resources:
 #   type: time
 #   source: {interval: 6h}
 
-# - name: slack-alert
-#   type: slack-notification
-#   source:
-#     url: {{webhook}}
-#     insecure: true
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: {{webhook}}
+    insecure: true
 
 jobs:
 - name: test
@@ -58,6 +58,10 @@ jobs:
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
+  - put: slack-alert
+    params:
+      text: |
+        $BUILD_PIPELINE_NAME has been deployed
 
 # - name: smoke_test
 #   public: true
