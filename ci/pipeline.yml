@@ -49,9 +49,6 @@ jobs:
   - get: pcf-springboot-demo-source
     trigger: true
     passed: [test]
-  # - get: 6h
-  #   trigger: true
-  #   passed: [test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
   - put: cf-deploy-pcf-springboot-demo
@@ -66,16 +63,13 @@ jobs:
 # - name: smoke_test
 #   public: true
 #   plan:
-#   - get: attendee-service-source
-#     trigger: true
-#     passed: [deploy]
-#   - get: 6h
+#   - get: pcf-springboot-demo-source
 #     trigger: true
 #     passed: [deploy]
 #   - task: smoke_test
-#     file: attendee-service-source/ci/tasks/smoke-test.yml
+#     file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
 #     params:
-#       ATTENDEE_SERVICE_URL: {{smoke-test-url}}
+#       URL: {{smoke-test-url}}
 #   - put: slack-alert
 #     params:
 #       text: |

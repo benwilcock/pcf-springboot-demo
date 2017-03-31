@@ -11,7 +11,7 @@ params:
   ATTENDEE_SERVICE_URL:
 
 inputs:
-- name: attendee-service-source
+- name: pcf-springboot-demo-source
 
 run:
-  path: attendee-service-source/ci/tasks/smoke-test.sh
+  path: pcf-springboot-demo-source/ci/tasks/smoke-test.sh

@@ -4,12 +4,12 @@ set -e
 
 if [ $# -ne 1 ]; then
   echo "Invalid usage"
-  echo "usage: $0 attendee_service_url"
+  echo "usage: $0 url"
   exit 1
 fi
 
 set -x
-export ATTENDEE_SERVICE_URL=$1
+export URL=$1
 
 BIN_DIR=$(cd $(dirname "$0") && pwd)
 $BIN_DIR/shpec
