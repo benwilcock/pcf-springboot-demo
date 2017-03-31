@@ -13,7 +13,7 @@ resources:
     uri: https://github.com/benwilcock/pcf-springboot-demo
     branch: master
 
-- name: cf-deploy-pcf-springboot-demo
+- name: deploy-to-pcf
   type: cf
   source:
     api: {{cf-endpoint}}
@@ -54,7 +54,7 @@ jobs:
     passed: [test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
-  - put: cf-deploy-pcf-springboot-demo
+  - put: deploy-to-pcf
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
