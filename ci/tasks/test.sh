@@ -4,7 +4,7 @@ set -ex
 
 pushd pcf-springboot-demo-source
   echo "Fetching Dependencies"
-  ./gradlew clean compile > /dev/null
+  ./gradlew clean assemble > /dev/null
 
   echo "Running Tests"
   ./gradlew test

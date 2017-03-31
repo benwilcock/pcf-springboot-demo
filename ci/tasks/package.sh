@@ -4,7 +4,7 @@ set -e +x
 
 pushd pcf-springboot-demo-source
   echo "Packaging JAR"
-  ./gradlew clean package
+  ./gradlew clean assemble
 popd
 
 jar_count=`find pcf-springboot-demo-source/target -type f -name *.jar | wc -l`
