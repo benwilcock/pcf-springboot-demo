@@ -13,4 +13,4 @@
 *.ipr
 
 ### Private files
-/ci/tasks/private.yml
+/ci/private.yml
