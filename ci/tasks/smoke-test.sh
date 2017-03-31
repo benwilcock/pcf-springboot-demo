@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt-get update && apt-get install -y curl
+apt-get update && apt-get install -y curl --allow-unauthenticated
 
 set -ex
 
@@ -9,7 +9,7 @@ if [ -z $URL ]; then
   exit 1
 fi
 
-pushd attendee-service-source
+pushd pcf-springboot-demo-source
   echo "Running smoke tests for $URL"
   smoke-tests/bin/test $URL
 popd
