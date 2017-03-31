@@ -17,7 +17,7 @@ describe "pcf-springboot-demo test"
       assert present $http_result '"hasmessaging": false'
     end
 
-    it "has database flag"
+    it "has database flag set to false"
       assert present $http_result '"hasdatabase": false'
     end
   end
