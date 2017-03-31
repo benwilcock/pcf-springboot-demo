@@ -12,5 +12,13 @@ describe "pcf-springboot-demo test"
     it "serves up json"
       assert match $content_type "application/json"
     end
+
+    it "has messaging flag"
+      assert present $http_result "hasmessaging"
+    end
+
+    it "has database flag"
+      assert present $http_result "hasdatabase"
+    end
   end
 end
