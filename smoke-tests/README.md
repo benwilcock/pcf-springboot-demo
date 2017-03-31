@@ -6,8 +6,8 @@ deployed instance of the application.
 
 ## Usage
 
-`bin/test <attendee_service_url>` where `<attendee_service_url>` is the base url of the
-attendee service application you'd like to test. For example:
+`bin/test <url>` where `<url>` is the base url of the
+application you'd like to test. For example:
 
 ```bash
 bin/test http://localhost:8181

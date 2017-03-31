@@ -1,7 +1,7 @@
 #!/bin/bash
-describe "attendee service"
+describe "pcf-springboot-demo test"
   describe "GET /"
-    http_result=`curl -s -o /dev/null -H 'Accept: application/json' $ATTENDEE_SERVICE_URL -w "%{http_code},%{content_type}"`
+    http_result=`curl -s -o /dev/null -H 'Accept: application/json' $URL -w "%{http_code},%{content_type}"`
     http_code=`echo $http_result | cut -d, -f1`
     content_type=`echo $http_result | cut -d, -f2`
 
