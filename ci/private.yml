@@ -1,0 +1,8 @@
+---
+cf-endpoint: api.run.pez.pivotal.io
+cf-user: benwilcock@gmail.com
+cf-password: fL91nSaneJoEAybbPzz6
+cf-org: pivot-bwilcock
+cf-space: concourse
+smoke-test-url: #http://concourse-attendee-service.cfapps.pez.pivotal.io
+webhook: #https://hooks.slack.com/services/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

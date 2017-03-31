@@ -2,10 +2,9 @@
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 .DS_Store
-/ci
-/scripts
-/smoke-tests
-
+.classpath
+.project
+.settings/
 
 ### IntelliJ IDEA ###
 .idea

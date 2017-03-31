@@ -1,0 +1,78 @@
+---
+# resource_types:
+# - name: slack-notification
+#   type: docker-image
+#   source:
+#     repository: cfcommunity/slack-notification-resource
+#     tag: latest
+
+resources:
+- name: pcf-springboot-demo-source
+  type: git
+  source:
+    uri: https://github.com/benwilcock/pcf-springboot-demo
+    branch: master
+
+- name: cf-deploy-pcf-springboot-demo
+  type: cf
+  source:
+    api: {{cf-endpoint}}
+    username: {{cf-user}}
+    password: {{cf-password}}
+    organization: {{cf-org}}
+    space: {{cf-space}}
+
+# - name: 6h
+#   type: time
+#   source: {interval: 6h}
+
+# - name: slack-alert
+#   type: slack-notification
+#   source:
+#     url: {{webhook}}
+#     insecure: true
+
+jobs:
+- name: test
+  public: true
+  plan:
+  - get: pcf-springboot-demo-source
+    trigger: true
+  # - get: 6h
+  #   trigger: true
+  - task: test
+    file: pcf-springboot-demo-source/ci/tasks/test.yml
+
+- name: deploy
+  public: true
+  plan:
+  - get: pcf-springboot-demo-source
+    trigger: true
+    passed: [test]
+  # - get: 6h
+  #   trigger: true
+  #   passed: [test]
+  - task: package
+    file: pcf-springboot-demo-source/ci/tasks/package.yml
+  - put: cf-deploy-pcf-springboot-demo
+    params:
+      manifest: pcf-springboot-demo-source/manifest.yml
+      path: package-output/pcf-springboot-demo.jar
+
+# - name: smoke_test
+#   public: true
+#   plan:
+#   - get: attendee-service-source
+#     trigger: true
+#     passed: [deploy]
+#   - get: 6h
+#     trigger: true
+#     passed: [deploy]
+#   - task: smoke_test
+#     file: attendee-service-source/ci/tasks/smoke-test.yml
+#     params:
+#       ATTENDEE_SERVICE_URL: {{smoke-test-url}}
+#   - put: slack-alert
+#     params:
+#       text: |
+#         The smoke test for $BUILD_PIPELINE_NAME has passed.
