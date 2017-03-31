@@ -3,10 +3,10 @@
 set -ex
 
 pushd pcf-springboot-demo-source
-  echo "Fetching Dependencies"
-  ./gradlew clean assemble > /dev/null
+  echo "Fetching Dependencies & Building Code..."
+  ./gradlew assemble > /dev/null
 
-  echo "Running Tests"
+  echo "Running Tests..."
   ./gradlew test
 popd
 
