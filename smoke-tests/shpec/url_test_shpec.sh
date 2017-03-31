@@ -13,12 +13,12 @@ describe "pcf-springboot-demo test"
       assert match $content_type "application/json"
     end
 
-    it "has messaging flag set to false"
-      assert present $http_result '"hasnomessaging": false'
+    it "has messaging flag set to true"
+      assert match $http_result '"hasmessaging":true'
     end
 
-    it "has database flag set to false"
-      assert present $http_result '"hasdatabase": false'
+    it "has database flag set to true"
+      assert match $http_result '"hasdatabase":true'
     end
   end
 end
