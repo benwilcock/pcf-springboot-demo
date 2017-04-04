@@ -59,7 +59,7 @@ jobs:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
 
-- name: smoke_test_without_services
+- name: smoke_test
   public: true
   plan:
   - get: pcf-springboot-demo-source
@@ -68,7 +68,7 @@ jobs:
   - get: 24h
     trigger: true
     passed: [deploy]
-  - task: smoke_test_without_services
+  - task: smoke_test
     file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
     params:
       URL: {{smoke-test-url}}

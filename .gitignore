@@ -4,7 +4,9 @@
 .DS_Store
 .classpath
 .project
-.settings/
+.settings
+.vscode
+bin
 
 ### IntelliJ IDEA ###
 .idea
