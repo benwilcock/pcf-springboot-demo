@@ -14,7 +14,7 @@ describe "pcf-springboot-demo test"
     end
   end
 
-  describe "has messaging and database"
+  describe "does not have messaging or a database"
     http_output=`curl -s -H 'Accept: application/json' $URL`
 
     it "outputs something"

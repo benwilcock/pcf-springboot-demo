@@ -11,7 +11,7 @@ resources:
   type: git
   source:
     uri: https://github.com/benwilcock/pcf-springboot-demo
-    branch: master
+    branch: alternatives
 
 - name: deploy-to-pcf
   type: cf
