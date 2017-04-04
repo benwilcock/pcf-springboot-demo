@@ -15,14 +15,19 @@ describe "pcf-springboot-demo test"
   end
 
   describe "has messaging and database"
-    http_output=`curl -H 'Accept: application/json' $URL`
+    http_output=`curl -s -H 'Accept: application/json' $URL`
 
-    it "has messaging flag set to true"
-      assert match $http_output '"hasmessaging":true'
+    it "outputs something"
+        assert present $http_output
+    end
+    it "has messaging set to true"
+      assert match $http_output 'hasmessaging'
+      assert match $http_output 'messaging'
     end
 
-    it "has database flag set to true"
-      assert match $http_output '"hasdatabase":true'
+    it "has database set to true"
+      assert match $http_output 'hasdatabase'
+      assert match $http_output 'database'
     end
 
   end
