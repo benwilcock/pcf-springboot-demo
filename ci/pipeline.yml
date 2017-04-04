@@ -26,11 +26,11 @@ resources:
   type: time
   source: {interval: 24h}
 
-- name: slack-alert
-  type: slack-notification
-  source:
-    url: {{webhook}}
-    insecure: true
+#- name: slack-alert
+#  type: slack-notification
+#  source:
+#    url: {{webhook}}
+#    insecure: true
 
 jobs:
 - name: test
@@ -58,20 +58,32 @@ jobs:
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
-#  - put: push
-#    params:
-#      manifest: pcf-springboot-demo-source/manifest-disconnected.yml
-#      path: package-output/pcf-springboot-demo.jar
+
+- name: package-disconnected
+  public: true
+  plan:
+  - get: pcf-springboot-demo-source
+    trigger: true
+    passed: [test]
+  - get: 24h
+    trigger: true
+    passed: [test]
+  - task: package
+    file: pcf-springboot-demo-source/ci/tasks/package.yml
+  - put: push
+    params:
+      manifest: pcf-springboot-demo-source/manifest-disconnected.yml
+      path: package-output/pcf-springboot-demo.jar
 
 #- name: connected_test
 #  public: true
 #  plan:
 #  - get: pcf-springboot-demo-source
 #    trigger: true
-#    passed: [package]
+#    passed: [package-connected]
 #  - get: 24h
 #    trigger: true
-#    passed: [package]
+#    passed: [package-connected]
 #  - task: smoke_test
 #    file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
 #    params:
