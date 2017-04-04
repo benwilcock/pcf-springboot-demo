@@ -32,7 +32,6 @@ public class PcfSpringBootApplication {
     public static void main(String[] args) {
         SpringApplication.run(PcfSpringBootApplication.class, args);
         LOG.info("Starting the PCF SpringBoot Demo with Thymeleaf.");
-        LOG.error("Simulating an error log message.");
     }
 
     @Controller
@@ -67,7 +66,9 @@ public class PcfSpringBootApplication {
                     Field urlField = ReflectionUtils.findField(dataSource.getClass(), "url");
                     ReflectionUtils.makeAccessible(urlField);
                     sb.append(urlField.get(dataSource));
+
                 } catch (Exception fe) {
+                    LOG.error("Datasource findField 'url' failed: ", fe);
                     try {
                         Method urlMethod = ReflectionUtils.findMethod(dataSource.getClass(), "getUrl");
                         ReflectionUtils.makeAccessible(urlMethod);
@@ -76,6 +77,7 @@ public class PcfSpringBootApplication {
                         sb.append("NOT_CONFIGURED (");
                         sb.append(me.getCause().getMessage());
                         sb.append(")");
+                        LOG.error("Datasource findMethod 'getUrl()' failed: ", me);
                     }
                 }
             }
@@ -95,6 +97,7 @@ public class PcfSpringBootApplication {
                     sb.append("NOT_CONFIGURED (");
                     sb.append(ce.getCause().getMessage());
                     sb.append(")");
+                    LOG.error("Messaging connectionFactory 'getHost()' or 'getPort()' failed: ", ce);
                 }
             }
             return sb.toString();
@@ -135,15 +138,14 @@ public class PcfSpringBootApplication {
             // Add the status to the /info endpoint using Properties
             Properties props = new Properties();
 
-
             // Add the basic status of the resources
-            props.put("info.hasdatabase", status.hasDatabase());
-            props.put("info.hasmessaging", status.hasMessaging());
-
             if(status.hasDatabase()) {
+                props.put("info.hasdatabase", status.hasDatabase());
                 props.put("info.database", status.getDatabaseDetails());
             }
+
             if(status.hasMessaging()) {
+                props.put("info.hasmessaging", status.hasMessaging());
                 props.put("info.messaging", status.getMessagingDetails());
             }
 
