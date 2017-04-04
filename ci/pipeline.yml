@@ -79,4 +79,22 @@ jobs:
   - put: slack-alert
     params:
       text: |
-        The smoke test for $BUILD_PIPELINE_NAME has passed.
+        The smoke test for $BUILD_PIPELINE_NAME (connected) has passed.
+
+- name: smoke_test_disconnected
+  public: true
+  plan:
+  - get: pcf-springboot-demo-source
+    trigger: true
+    passed: [deploy]
+  - get: 24h
+    trigger: true
+    passed: [deploy]
+  - task: smoke_test_disconnected
+    file: pcf-springboot-demo-source/ci/tasks/smoke-test-disconnected.yml
+    params:
+      URL: {{smoke-test-disconnected-url}}
+  - put: slack-alert
+    params:
+      text: |
+        The smoke test for $BUILD_PIPELINE_NAME (disconnected) has passed.
