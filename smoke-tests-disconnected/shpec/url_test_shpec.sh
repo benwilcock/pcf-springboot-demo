@@ -21,13 +21,13 @@ describe "pcf-springboot-demo test"
         assert present $http_output
     end
     it "messaging not present"
-      assert not_match $http_output 'hasmessaging'
-      assert not_match $http_output 'messaging'
+      assert no_match $http_output 'hasmessaging'
+      assert no_match $http_output 'messaging'
     end
 
     it "database not present"
-      assert not_match $http_output 'hasdatabase'
-      assert not_match $http_output 'database'
+      assert no_match $http_output 'hasdatabase'
+      assert no_match $http_output 'database'
     end
 
   end
