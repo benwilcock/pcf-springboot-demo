@@ -43,7 +43,7 @@ jobs:
   - task: test
     file: pcf-springboot-demo-source/ci/tasks/test.yml
 
-- name: package
+- name: package-connected
   public: true
   plan:
   - get: pcf-springboot-demo-source
@@ -58,28 +58,28 @@ jobs:
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
-  - put: push
-    params:
-      manifest: pcf-springboot-demo-source/manifest-disconnected.yml
-      path: package-output/pcf-springboot-demo.jar
+#  - put: push
+#    params:
+#      manifest: pcf-springboot-demo-source/manifest-disconnected.yml
+#      path: package-output/pcf-springboot-demo.jar
 
-- name: connected_test
-  public: true
-  plan:
-  - get: pcf-springboot-demo-source
-    trigger: true
-    passed: [package]
-  - get: 24h
-    trigger: true
-    passed: [package]
-  - task: smoke_test
-    file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
-    params:
-      URL: {{smoke-test-url}}
-  - put: slack-alert
-    params:
-      text: |
-        The smoke test for $BUILD_PIPELINE_NAME (connected) has passed.
+#- name: connected_test
+#  public: true
+#  plan:
+#  - get: pcf-springboot-demo-source
+#    trigger: true
+#    passed: [package]
+#  - get: 24h
+#    trigger: true
+#    passed: [package]
+#  - task: smoke_test
+#    file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
+#    params:
+#      URL: {{smoke-test-url}}
+#  - put: slack-alert
+#    params:
+#      text: |
+#        The smoke test for $BUILD_PIPELINE_NAME (connected) has passed.
 #
 #- name: smoke_test_disconnected
 #  public: true
