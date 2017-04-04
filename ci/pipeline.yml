@@ -13,7 +13,7 @@ resources:
     uri: https://github.com/benwilcock/pcf-springboot-demo
     branch: alternatives
 
-- name: deploy-to-pcf
+- name: cf-push
   type: cf
   source:
     api: {{cf-endpoint}}
@@ -43,7 +43,7 @@ jobs:
   - task: test
     file: pcf-springboot-demo-source/ci/tasks/test.yml
 
-- name: deploy
+- name: package
   public: true
   plan:
   - get: pcf-springboot-demo-source
@@ -54,24 +54,24 @@ jobs:
     passed: [test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
-  - put: deploy-to-pcf
+  - put: cf-push
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
-  - put: deploy-to-pcf
+  - put: cf-push
     params:
       manifest: pcf-springboot-demo-source/manifest-disconnected.yml
       path: package-output/pcf-springboot-demo.jar
 
-- name: smoke_test
+- name: smoke_test_connected
   public: true
   plan:
   - get: pcf-springboot-demo-source
     trigger: true
-    passed: [deploy]
+    passed: [package]
   - get: 24h
     trigger: true
-    passed: [deploy]
+    passed: [package]
   - task: smoke_test
     file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
     params:
@@ -80,21 +80,21 @@ jobs:
     params:
       text: |
         The smoke test for $BUILD_PIPELINE_NAME (connected) has passed.
-
-- name: smoke_test_disconnected
-  public: true
-  plan:
-  - get: pcf-springboot-demo-source
-    trigger: true
-    passed: [deploy]
-  - get: 24h
-    trigger: true
-    passed: [deploy]
-  - task: smoke_test_disconnected
-    file: pcf-springboot-demo-source/ci/tasks/smoke-test-disconnected.yml
-    params:
-      URL: {{smoke-test-disconnected-url}}
-  - put: slack-alert
-    params:
-      text: |
-        The smoke test for $BUILD_PIPELINE_NAME (disconnected) has passed.
+#
+#- name: smoke_test_disconnected
+#  public: true
+#  plan:
+#  - get: pcf-springboot-demo-source
+#    trigger: true
+#    passed: [deploy]
+#  - get: 24h
+#    trigger: true
+#    passed: [deploy]
+#  - task: smoke_test_disconnected
+#    file: pcf-springboot-demo-source/ci/tasks/smoke-test-disconnected.yml
+#    params:
+#      URL: {{smoke-test-disconnected-url}}
+#  - put: slack-alert
+#    params:
+#      text: |
+#        The smoke test for $BUILD_PIPELINE_NAME (disconnected) has passed.
