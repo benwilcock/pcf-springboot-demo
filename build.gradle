@@ -37,7 +37,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 
 	//Test
-	compile("com.h2database:h2") // needs database to bootstrap the server
+	compile("com.h2database:h2") // needs database to bootstrap the server for testing
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

@@ -1,5 +1,7 @@
 package io.pivotal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpConnectException;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,16 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
+
 @SpringBootApplication
 public class PcfSpringBootApplication {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PcfSpringBootApplication.class);
+
     public static void main(String[] args) {
         SpringApplication.run(PcfSpringBootApplication.class, args);
+        LOG.info("Starting the PCF SpringBoot Demo with Thymeleaf.");
+        LOG.error("Simulating an error log message.");
     }
 
     @Controller
