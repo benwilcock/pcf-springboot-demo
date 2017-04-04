@@ -58,6 +58,10 @@ jobs:
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
+  - put: deploy-to-pcf
+    params:
+      manifest: pcf-springboot-demo-source/manifest-disconnected.yml
+      path: package-output/pcf-springboot-demo.jar
 
 - name: smoke_test
   public: true
