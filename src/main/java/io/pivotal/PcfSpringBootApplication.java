@@ -66,19 +66,14 @@ public class PcfSpringBootApplication {
                     Field urlField = ReflectionUtils.findField(dataSource.getClass(), "url");
                     ReflectionUtils.makeAccessible(urlField);
                     sb.append(urlField.get(dataSource));
-
                 } catch (Exception fe) {
-
+                    LOG.warn("Datasource findField 'url' failed: ", fe);
                     try {
                         Method urlMethod = ReflectionUtils.findMethod(dataSource.getClass(), "getUrl");
                         ReflectionUtils.makeAccessible(urlMethod);
                         sb.append(urlMethod.invoke(dataSource, (Object[]) null));
                     } catch (Exception me) {
-                        sb.append("NOT_CONFIGURED (");
-                        sb.append(me.getCause().getMessage());
-                        sb.append(")");
-                        //LOG.error("Datasource findField 'url' failed: ", fe);
-                        //LOG.error("Datasource findMethod 'getUrl()' failed: ", me);
+                        LOG.warn("Datasource findMethod 'getUrl()' failed: ", me);
                     }
                 }
             }
@@ -95,10 +90,7 @@ public class PcfSpringBootApplication {
                     sb.append(":");
                     sb.append(rabbitConnectionFactory.getPort());
                 } catch (AmqpConnectException ce) {
-                    sb.append("NOT_CONFIGURED (");
-                    sb.append(ce.getCause().getMessage());
-                    sb.append(")");
-                    //LOG.error("Messaging connectionFactory 'getHost()' or 'getPort()' failed: ", ce);
+                    LOG.warn("Messaging connectionFactory 'getHost()' or 'getPort()' call failed: ", ce);
                 }
             }
             return sb.toString();
@@ -116,6 +108,7 @@ public class PcfSpringBootApplication {
             }
             catch (AmqpConnectException qe){
                 hasMessaging = false;
+                LOG.warn("Messaging is not connected: {}", qe.getMessage());
             }
             return hasMessaging;
         }
