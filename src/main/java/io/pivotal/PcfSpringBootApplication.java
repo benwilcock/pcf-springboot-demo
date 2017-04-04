@@ -68,7 +68,7 @@ public class PcfSpringBootApplication {
                     sb.append(urlField.get(dataSource));
 
                 } catch (Exception fe) {
-                    LOG.error("Datasource findField 'url' failed: ", fe);
+
                     try {
                         Method urlMethod = ReflectionUtils.findMethod(dataSource.getClass(), "getUrl");
                         ReflectionUtils.makeAccessible(urlMethod);
@@ -77,7 +77,8 @@ public class PcfSpringBootApplication {
                         sb.append("NOT_CONFIGURED (");
                         sb.append(me.getCause().getMessage());
                         sb.append(")");
-                        LOG.error("Datasource findMethod 'getUrl()' failed: ", me);
+                        //LOG.error("Datasource findField 'url' failed: ", fe);
+                        //LOG.error("Datasource findMethod 'getUrl()' failed: ", me);
                     }
                 }
             }
@@ -97,7 +98,7 @@ public class PcfSpringBootApplication {
                     sb.append("NOT_CONFIGURED (");
                     sb.append(ce.getCause().getMessage());
                     sb.append(")");
-                    LOG.error("Messaging connectionFactory 'getHost()' or 'getPort()' failed: ", ce);
+                    //LOG.error("Messaging connectionFactory 'getHost()' or 'getPort()' failed: ", ce);
                 }
             }
             return sb.toString();
