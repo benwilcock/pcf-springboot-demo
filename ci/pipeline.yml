@@ -63,7 +63,7 @@ jobs:
       manifest: pcf-springboot-demo-source/manifest-disconnected.yml
       path: package-output/pcf-springboot-demo.jar
 
-- name: smoke_test_connected
+- name: connected_test
   public: true
   plan:
   - get: pcf-springboot-demo-source
