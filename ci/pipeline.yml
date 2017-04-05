@@ -22,7 +22,7 @@ resources:
     organization: {{cf-org}}
     space: {{cf-space}}
 
-- name: 24h
+- name: timer
   type: time
   source: {interval: 24h}
 
@@ -38,7 +38,7 @@ jobs:
   plan:
   - get: pcf-springboot-demo-source
     trigger: true
-  - get: 24h
+  - get: timer
     trigger: true
   - task: test
     file: pcf-springboot-demo-source/ci/tasks/test.yml
@@ -49,7 +49,7 @@ jobs:
   - get: pcf-springboot-demo-source
     trigger: true
     passed: [test]
-  - get: 24h
+  - get: timer
     trigger: true
     passed: [test]
   - task: package
@@ -65,7 +65,7 @@ jobs:
   - get: pcf-springboot-demo-source
     trigger: true
     passed: [test]
-  - get: 24h
+  - get: timer
     trigger: true
     passed: [test]
   - task: package
