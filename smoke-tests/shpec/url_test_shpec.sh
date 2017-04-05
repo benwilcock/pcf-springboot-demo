@@ -1,5 +1,5 @@
 #!/bin/bash
-describe "pcf-springboot-demo test"
+describe "pcf-springboot-demo - Test the CONNECTED App"
   describe "HTTP code and content"
     http_result=`curl -s -o /dev/null -H 'Accept: application/json' $URL -w "%{http_code},%{content_type}"`
     http_code=`echo $http_result | cut -d, -f1`
