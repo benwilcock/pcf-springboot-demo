@@ -26,11 +26,11 @@ resources:
   type: time
   source: {interval: 24h}
 
-#- name: slack-alert
-#  type: slack-notification
-#  source:
-#    url: {{webhook}}
-#    insecure: true
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: {{webhook}}
+    insecure: true
 
 jobs:
 - name: test
@@ -75,23 +75,23 @@ jobs:
       manifest: pcf-springboot-demo-source/manifest-disconnected.yml
       path: package-output/pcf-springboot-demo.jar
 
-#- name: connected_test
-#  public: true
-#  plan:
-#  - get: pcf-springboot-demo-source
-#    trigger: true
-#    passed: [package-connected]
-#  - get: 24h
-#    trigger: true
-#    passed: [package-connected]
-#  - task: smoke_test
-#    file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
-#    params:
-#      URL: {{smoke-test-url}}
-#  - put: slack-alert
-#    params:
-#      text: |
-#        The smoke test for $BUILD_PIPELINE_NAME (connected) has passed.
+- name: connected_test
+  public: true
+  plan:
+  - get: pcf-springboot-demo-source
+    trigger: true
+    passed: [package-connected]
+  - get: timer
+    trigger: true
+    passed: [package-connected]
+  - task: smoke_test
+    file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
+    params:
+      URL: {{smoke-test-url}}
+  - put: slack-alert
+    params:
+      text: |
+        The smoke test for $BUILD_PIPELINE_NAME (connected) has passed.
 #
 #- name: smoke_test_disconnected
 #  public: true
