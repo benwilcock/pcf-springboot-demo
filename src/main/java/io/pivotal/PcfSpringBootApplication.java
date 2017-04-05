@@ -5,17 +5,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 
 @SpringBootApplication
 public class PcfSpringBootApplication {
-
-    @Autowired(required = false)
-    DataSource dataSource;
 
     private static final Logger LOG = LoggerFactory.getLogger(PcfSpringBootApplication.class);
 
@@ -104,37 +105,31 @@ public class PcfSpringBootApplication {
 //        }
 //    }
 //
-//    @Configuration
-//    class CustomInfoEndpoint {
-//
-//        @Autowired
-//        Status status;
-//
-//        @Autowired
-//        GitProperties gitProperties;
-//
-//        /**
-//         * These properties will show up in Spring Boot Actuator's /info endpoint
-//         **/
-//        @Autowired
-//        public void setInfoProperties(ConfigurableEnvironment env) {
-//
-//            // Add the status to the /info endpoint using Properties
-//            Properties props = new Properties();
-//
-//            // Add the basic status of the resources
-//            if(status.hasDatabase()) {
-//                props.put("info.hasdatabase", status.hasDatabase());
-//                props.put("info.database", status.getDatabaseDetails());
-//            }
-//
-//            if(status.hasMessaging()) {
-//                props.put("info.hasmessaging", status.hasMessaging());
-//                props.put("info.messaging", status.getMessagingDetails());
-//            }
-//
-//            // Set the new properties into the environment
-//            env.getPropertySources().addFirst(new PropertiesPropertySource("extra-info-props", props));
-//        }
-//    }
+    
+    @Configuration
+    class CustomInfoEndpoint {
+
+        @Autowired(required = false)
+        DataSource dataSource;
+
+
+        private boolean hasDatabase() {
+            return !(null == dataSource);
+        }
+
+        @Autowired
+        public void setInfoProperties(ConfigurableEnvironment env) {
+
+            // Add the status to the /info endpoint using Properties
+            Properties props = new Properties();
+
+            // Add the basic status of the resources
+            if(null != dataSource) {
+                props.put("info.hasdatabase", true);
+            }
+
+            // Make these properties will show up in Spring Boot Actuator's '/info' endpoint...
+            env.getPropertySources().addFirst(new PropertiesPropertySource("extra-info-props", props));
+        }
+    }
 }
