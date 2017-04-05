@@ -34,8 +34,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 
 	//Data tools...
-	compile("com.h2database:h2")
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+//	compile("com.h2database:h2")
+//	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 //	compile('org.springframework.boot:spring-boot-starter-data-rest')
 
 	//Test tools....

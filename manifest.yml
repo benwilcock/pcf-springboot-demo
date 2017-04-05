@@ -7,3 +7,7 @@ applications:
   services:
     - mysql
     - rabbit
+
+#  env:
+#    JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=n,address=2.101.163.21:5005
+#    ,suspend=y,onthrow=<FQ exception class name>,onuncaught=<y/n>
