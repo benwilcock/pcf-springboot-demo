@@ -32,8 +32,8 @@
             <p th:text="'Runtime: ' + ${@environment.getProperty('java.runtime.name')}"/>
             <p th:text="'Variant: ' + ${@environment.getProperty('java.vm.name')}"/>
             <p th:text="'Version: ' + ${@environment.getProperty('java.runtime.version')}"/>
-            <p th:text="'Has Database: ' + ${@environment.getProperty('info.hasdatabase')}"/>
-            <p th:text="'Has Messaging: ' + ${@environment.getProperty('info.hasmessaging')}"/>
+            <!--<p th:text="'Has Database: ' + ${@environment.getProperty('info.hasdatabase')}"/>-->
+            <!--<p th:text="'Has Messaging: ' + ${@environment.getProperty('info.hasmessaging')}"/>-->
         </div>
     </div>
     <div class="w3-half w3-light-grey w3-center" style="min-height:700px" id="pcf">
@@ -83,22 +83,22 @@
 </div>
 
 
-<div class="w3-row">
-    <div th:if="${@environment.getProperty('info.hasdatabase')}" class="w3-half w3-deep-purple w3-container w3-center" style="min-height:700px" id="database">
-        <div class="w3-padding-64">
-            <h1>Database</h1>
-        </div>
-        <div class="w3-center">
-        </div>
-    </div>
-    <div th:if="${@environment.getProperty('info.hasmessaging')}" class="w3-half w3-deep-orange w3-container w3-center" style="min-height:700px" id="messaging">
-        <div class="w3-padding-64">
-            <h1>Messaging</h1>
-        </div>
-        <div class="w3-center">
-        </div>
-    </div>
-</div>
+<!--<div class="w3-row">-->
+    <!--<div th:if="${@environment.getProperty('info.hasdatabase')}" class="w3-half w3-deep-purple w3-container w3-center" style="min-height:700px" id="database">-->
+        <!--<div class="w3-padding-64">-->
+            <!--<h1>Database</h1>-->
+        <!--</div>-->
+        <!--<div class="w3-center">-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div th:if="${@environment.getProperty('info.hasmessaging')}" class="w3-half w3-deep-orange w3-container w3-center" style="min-height:700px" id="messaging">-->
+        <!--<div class="w3-padding-64">-->
+            <!--<h1>Messaging</h1>-->
+        <!--</div>-->
+        <!--<div class="w3-center">-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
 </body>
 <!-- Footer -->
