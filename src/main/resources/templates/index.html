@@ -23,7 +23,7 @@
         </div>
         <div class="w3-center">
             <p th:text="'Spring App Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
-            <p th:text="'Profiles: ' + ${@environment.getProperty('profiles')}"/>
+            <p th:text="'Profiles: ' + ${@environment.getProperty('spring.profiles')}"/>
             <p th:text="'Version: ' + ${@buildProperties.getVersion()}"/>
             <p th:text="'Build Date: ' + ${@buildProperties.getTime()}"/>
             <p th:text="'Branch: ' + ${@gitProperties.getBranch()}"/>
