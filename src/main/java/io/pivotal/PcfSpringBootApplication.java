@@ -105,11 +105,11 @@ public class PcfSpringBootApplication {
 //        }
 //    }
 //
-    
+
     @Configuration
     class CustomInfoEndpoint {
 
-        @Autowired(required = false)
+        @Autowired
         DataSource dataSource;
 
 
@@ -128,8 +128,10 @@ public class PcfSpringBootApplication {
                 props.put("info.hasdatabase", true);
             }
 
-            // Make these properties will show up in Spring Boot Actuator's '/info' endpoint...
-            env.getPropertySources().addFirst(new PropertiesPropertySource("extra-info-props", props));
+            if(null != props) {
+                // Make these properties will show up in Spring Boot Actuator's '/info' endpoint...
+                env.getPropertySources().addFirst(new PropertiesPropertySource("extra-info-props", props));
+            }
         }
     }
 }
