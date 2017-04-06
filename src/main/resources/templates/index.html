@@ -7,10 +7,15 @@
 <link rel="stylesheet" href="/stylesheet.css"/>
 <body class="w3-content" style="max-width:1300px">
 
-<div class="w3-row">
-    <div class="w3-green w3-container w3-center" style="height:100px" id="header">
+<div class="w3-row w3-black">
+    <div class="w3-half w3-container w3-center" style="height:100px" id="header">
         <div class="w3-padding-16">
-            <h3>SpringBoot Info</h3>
+            <h3 class="w3-right">SpringBoot Info</h3>
+        </div>
+    </div>
+    <div class="w3-half w3-container w3-center" style="height:100px" id="header">
+        <div class="w3-padding-16">
+            <img class="w3-left" src="Spring.png" width="50%" height="50%"/>
         </div>
     </div>
 </div>
@@ -40,21 +45,21 @@
         </div>
     </div>
 
-    <div class="w3-half w3-black w3-container w3-center" style="height:700px" id="standard">
+    <div class="w3-half w3-green w3-container w3-center" style="height:700px" id="standard">
         <div class="w3-padding-64">
             <h1>Actuator</h1>
         </div>
         <div class="w3-center">
-            <a href="/info" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">/Info</a>
-            <a href="/health" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">/Health</a>
-            <a href="/env" class="w3-button w3-black w3-block w3-hover-red w3-padding-16">/Env</a>
-            <a href="/configprops" class="w3-button w3-black w3-block w3-hover-red w3-padding-16">/ConfigProps</a>
-            <a href="/beans" class="w3-button w3-black w3-block w3-hover-red w3-padding-16">/Beans</a>
-            <a href="/metrics" class="w3-button w3-black w3-block w3-hover-red w3-padding-16">/Metrics</a>
-            <a href="/loggers" class="w3-button w3-black w3-block w3-hover-red w3-padding-16">/Loggers</a>
-            <a href="/trace" class="w3-button w3-black w3-block w3-hover-red w3-padding-16">/Trace</a>
+            <a href="/info" class="w3-button w3-block w3-hover-teal w3-padding-16">/Info</a>
+            <a href="/health" class="w3-button w3-block w3-hover-teal w3-padding-16">/Health</a>
+            <a href="/env" class="w3-button w3-block w3-hover-amber w3-padding-16">/Env</a>
+            <a href="/configprops" class="w3-button w3-block w3-hover-amber w3-padding-16">/ConfigProps</a>
+            <a href="/beans" class="w3-button w3-block w3-hover-amber w3-padding-16">/Beans</a>
+            <a href="/metrics" class="w3-button w3-block w3-hover-amber w3-padding-16">/Metrics</a>
+            <a href="/loggers" class="w3-button w3-block w3-hover-amber w3-padding-16">/Loggers</a>
+            <a href="/trace" class="w3-button w3-block w3-hover-amber w3-padding-16">/Trace</a>
             <!--<small><p>To disable Actuator security, set <pre>management.security.enabled=false</pre> in <pre>application.properties</pre>.</p></small>-->
-            <small class="w3-button w3-black w3-block w3-hover-red w3-padding-16"
+            <small class="w3-button w3-block w3-hover-amber w3-padding-16"
                th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
         </div>
     </div>

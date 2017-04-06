@@ -61,7 +61,7 @@ jobs:
   - put: slack-alert
     params:
       text: |
-        The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME (connected) was pushed.
+        The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME was pushed.
 
 - name: package-disconnected
   public: true
@@ -81,7 +81,7 @@ jobs:
   - put: slack-alert
     params:
       text: |
-        The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME (disconnected) was pushed.
+        The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME was pushed.
 
 #  SHPEC is proving to be a bit of a dissapointment.
 #  It's executing all shpec based tests in all folders, so the test stage always fails.
