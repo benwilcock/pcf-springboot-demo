@@ -56,7 +56,7 @@ jobs:
     file: pcf-springboot-demo-source/ci/tasks/package.yml
   - put: push-to-pcf
     params:
-      manifest: pcf-springboot-demo-source/manifest.yml
+      manifest: pcf-springboot-demo-source/manifest-connected.yml
       path: package-output/pcf-springboot-demo.jar
 
 - name: push-disconnected
