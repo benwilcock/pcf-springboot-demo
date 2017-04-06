@@ -32,9 +32,9 @@ public class PcfSpringBootApplication {
     class stbController {
 
         @GetMapping("/stb")
-        public String dashboard() {
-            LOG.error("Had a crisis...   :(   ");
-            return "index";
+        public void dashboard() {
+            LOG.error("Had a crisis...   :(   ", new UnsupportedOperationException(""));
+            System.exit(-1);
         }
     }
 }

@@ -22,7 +22,7 @@
             <h1>App</h1>
         </div>
         <div class="w3-center">
-            <p th:text="'Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
+            <p th:text="'App Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
             <p th:each="activeprofile : ${@environment.getActiveProfiles()}"  th:text="'Active Profile: '+${activeprofile}"/>
             <p th:text="'Version: ' + ${@buildProperties.getVersion()}"/>
             <p th:text="'Build Date: ' + ${@buildProperties.getTime()}"/>
@@ -67,8 +67,8 @@
             <h1>Cloud</h1>
         </div>
         <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
-            <p th:text="'Foundation: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
-            <p th:text="'Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
+            <p th:text="'API: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
+            <p th:text="'App Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
             <p th:text="'Ident: ' + ${@environment.getProperty('INSTANCE_GUID')}"/>
             <p th:text="'Index: ' + ${@environment.getProperty('INSTANCE_INDEX')}"/>
             <p th:text="'Space: ' + ${@environment.getProperty('vcap.application.space_name')}"/>

@@ -26,11 +26,11 @@ resources:
   type: time
   source: {interval: 24h}
 
-#- name: slack-alert
-#  type: slack-notification
-#  source:
-#    url: {{webhook}}
-#    insecure: true
+- name: slack-alert
+  type: slack-notification
+  source:
+    url: {{webhook}}
+    insecure: true
 
 jobs:
 - name: test
@@ -58,6 +58,10 @@ jobs:
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
+  - put: slack-alert
+    params:
+      text: |
+        The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME (connected) was pushed.
 
 - name: package-disconnected
   public: true
@@ -74,7 +78,10 @@ jobs:
     params:
       manifest: pcf-springboot-demo-source/manifest-disconnected.yml
       path: package-output/pcf-springboot-demo.jar
-
+  - put: slack-alert
+    params:
+      text: |
+        The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME (disconnected) was pushed.
 
 #  SHPEC is proving to be a bit of a dissapointment.
 #  It's executing all shpec based tests in all folders, so the test stage always fails.
