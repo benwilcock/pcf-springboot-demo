@@ -13,7 +13,7 @@ resources:
     uri: https://github.com/benwilcock/pcf-springboot-demo
     branch: master
 
-- name: push-to-pws
+- name: push-to-pcf
   type: cf
   source:
     api: {{cf-endpoint}}
@@ -54,7 +54,7 @@ jobs:
     passed: [unit-test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
-  - put: push-to-pws
+  - put: push-to-pcf
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
@@ -74,15 +74,28 @@ jobs:
     passed: [unit-test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
-  - put: push-to-pws
+  - put: push-to-pcf
     params:
       manifest: pcf-springboot-demo-source/manifest-disconnected.yml
       path: package-output/pcf-springboot-demo.jar
+
+- name: test-connected
+  public: true
+  plan:
+  - get: pcf-springboot-demo-source
+    trigger: true
+    passed: [push-connected]
+  - get: timer
+    trigger: true
+    passed: [push-connected]
+  - task: test-disconnected
+    file: pcf-springboot-demo-source/ci/tasks/web-test-connected.yml
+    params:
+      URL: {{web-test-connected-url}}
   - put: slack-alert
     params:
       text: |
-        The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME was pushed.
-
+        The web test for $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME has passed!
 
 - name: test-disconnected
   public: true
@@ -100,7 +113,7 @@ jobs:
   - put: slack-alert
     params:
       text: |
-        The web test for $BUILD_JOB_NAME has passed!
+        The web test for $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME has passed!
 
 #  SHPEC is proving to be a bit of a dissapointment.
 #  It's executing all shpec based tests in all folders, so the test stage always fails.
