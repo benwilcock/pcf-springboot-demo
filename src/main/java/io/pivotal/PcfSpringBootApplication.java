@@ -32,9 +32,10 @@ public class PcfSpringBootApplication {
     class stbController {
 
         @GetMapping("/stb")
-        public void dashboard() {
-            LOG.error("Had a crisis...   :(   ", new UnsupportedOperationException(""));
+        public String stb() {
+            LOG.error("Had a crisis...   :(   ", new OutOfMemoryError("Fake OutOfMemoryError!"));
             System.exit(-1);
+            return "index";
         }
     }
 }

@@ -17,12 +17,12 @@
 
 <!-- Second Grid: Configuration Tips -->
 <div class="w3-row">
-    <div class="w3-half w3-dark-grey w3-container w3-center" style="height:700px" id="app">
+    <div class="w3-half w3-teal w3-container w3-center" style="height:700px" id="app">
         <div class="w3-padding-64">
-            <h1>App</h1>
+            <h1>Application</h1>
         </div>
         <div class="w3-center">
-            <p th:text="'App Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
+            <p th:text="'Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
             <p th:each="activeprofile : ${@environment.getActiveProfiles()}"  th:text="'Active Profile: '+${activeprofile}"/>
             <p th:text="'Version: ' + ${@buildProperties.getVersion()}"/>
             <p th:text="'Build Date: ' + ${@buildProperties.getTime()}"/>
