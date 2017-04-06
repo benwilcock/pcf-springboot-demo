@@ -10,7 +10,7 @@
 <div class="w3-row">
     <div class="w3-green w3-container w3-center" style="height:100px" id="header">
         <div class="w3-padding-16">
-            <h3 th:text="'PCF Spring Boot Demo: ' + ${@environment.getProperty('local.server.port')}" />
+            <h3>SpringBoot Info</h3>
         </div>
     </div>
 </div>
@@ -19,16 +19,16 @@
 <div class="w3-row">
     <div class="w3-half w3-dark-grey w3-container w3-center" style="height:700px" id="app">
         <div class="w3-padding-64">
-            <h1>Spring</h1>
+            <h1>App</h1>
         </div>
         <div class="w3-center">
-            <p th:text="'Application Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
+            <p th:text="'Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
             <p th:each="activeprofile : ${@environment.getActiveProfiles()}"  th:text="'Active Profile: '+${activeprofile}"/>
             <p th:text="'Version: ' + ${@buildProperties.getVersion()}"/>
             <p th:text="'Build Date: ' + ${@buildProperties.getTime()}"/>
             <p th:text="'Branch: ' + ${@gitProperties.getBranch()}"/>
             <p th:text="'CommitId: ' + ${@gitProperties.getCommitId()}"/>
-            <p th:text="'Port: ' + ${@environment.getProperty('local.server.port')}"/>
+            <p th:text="'Internal Port: ' + ${@environment.getProperty('local.server.port')}"/>
             <p th:text="'OS: ' + ${@environment.getProperty('os.name')}"/>
             <p th:text="'Java Runtime: ' + ${@environment.getProperty('java.runtime.name')}"/>
             <p th:text="'Java Variant: ' + ${@environment.getProperty('java.vm.name')}"/>
@@ -68,17 +68,16 @@
         </div>
         <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
             <p th:text="'Foundation: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
-            <p th:text="'App Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
-            <p th:text="'App Id: ' + ${@environment.getProperty('INSTANCE_GUID')}"/>
-            <p th:text="'App Index: ' + ${@environment.getProperty('INSTANCE_INDEX')}"/>
-            <p th:text="'App Space: ' + ${@environment.getProperty('vcap.application.space_name')}"/>
-            <p th:text="'App URI: ' + ${@environment.getProperty('vcap.application.uris')}"/>
-            <p th:text="'App Memory: ' + ${@environment.getProperty('vcap.application.limits.mem')}"/>
-            <p th:text="'App Storage: ' + ${@environment.getProperty('vcap.application.limits.disk')} + ' (ephem)'"/>
-            <p th:each="uri : ${@environment.getProperty('cloud.application.application_uris')}"  th:text="'Uri: '+${uri}"/>
+            <p th:text="'Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
+            <p th:text="'Ident: ' + ${@environment.getProperty('INSTANCE_GUID')}"/>
+            <p th:text="'Index: ' + ${@environment.getProperty('INSTANCE_INDEX')}"/>
+            <p th:text="'Space: ' + ${@environment.getProperty('vcap.application.space_name')}"/>
+            <p th:text="'Memory (MB): ' + ${@environment.getProperty('vcap.application.limits.mem')}"/>
+            <p th:text="'Storage (MB): ' + ${@environment.getProperty('vcap.application.limits.disk')} + ' [ephemeral]'"/>
+            <p th:each="uri : ${@environment.getProperty('cloud.application.application_uris')}"  th:text="'URI: '+${uri}"/>
         </div>
         <div th:unless="${@environment.acceptsProfiles('cloud')}" class="w3-center">
-            <p>Unavailable</p>
+            <p>No Cloud Platform</p>
         </div>
     </div>
 
@@ -94,7 +93,7 @@
             <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.mysql.connection.scheme')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <p>No Data</p>
+            <p>No Data Service</p>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
             <h3>Messaging</h3>
@@ -105,7 +104,7 @@
             <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.scheme')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
-            <p>No Messaging</p>
+            <p>No Messaging Service</p>
         </div>
     </div>
 </div>

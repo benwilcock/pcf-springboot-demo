@@ -28,104 +28,13 @@ public class PcfSpringBootApplication {
         }
     }
 
-//    @Component
-//    class Status {
-//
-//        @Autowired
-//        Environment env;
-//
-//        @Autowired(required = false)
-//        DataSource dataSource;
-//
-//        @Autowired(required = false)
-//        ConnectionFactory rabbitConnectionFactory;
-//
-//        public Status() {
-//        }
-//
-//        public String getDatabaseDetails() {
-//            StringBuilder sb = new StringBuilder();
-//
-//            if (this.hasDatabase()) {
-//                try {
-//                    Field urlField = ReflectionUtils.findField(dataSource.getClass(), "url");
-//                    ReflectionUtils.makeAccessible(urlField);
-//                    sb.append(urlField.get(dataSource));
-//                } catch (Exception fe) {
-//                    LOG.warn("Datasource findField 'url' failed: ", fe);
-//                    try {
-//                        Method urlMethod = ReflectionUtils.findMethod(dataSource.getClass(), "getUrl");
-//                        ReflectionUtils.makeAccessible(urlMethod);
-//                        sb.append(urlMethod.invoke(dataSource, (Object[]) null));
-//                    } catch (Exception me) {
-//                        LOG.warn("Datasource findMethod 'getUrl()' failed: ", me);
-//                    }
-//                }
-//            }
-//
-//            return sb.toString();
-//        }
-//
-//        public String getMessagingDetails() {
-//            StringBuilder sb = new StringBuilder();
-//
-//            if (this.hasMessaging()) {
-//                try {
-//                    sb.append(rabbitConnectionFactory.getHost());
-//                    sb.append(":");
-//                    sb.append(rabbitConnectionFactory.getPort());
-//                } catch (AmqpConnectException ce) {
-//                    LOG.warn("Messaging connectionFactory 'getHost()' or 'getPort()' call failed: ", ce);
-//                }
-//            }
-//            return sb.toString();
-//        }
-//
-//        public boolean hasDatabase() {
-//            return !(null == dataSource);
-//        }
-//
-//        public boolean hasMessaging() {
-//            boolean hasMessaging = false;
-//
-//            try {
-//                hasMessaging = rabbitConnectionFactory.createConnection().isOpen();
-//            }
-//            catch (AmqpConnectException qe){
-//                hasMessaging = false;
-//                LOG.warn("Messaging is not connected: {}", qe.getMessage());
-//            }
-//            return hasMessaging;
-//        }
-//    }
-//
+    @Controller
+    class stbController {
 
-//    @Configuration
-//    class CustomInfoEndpoint {
-//
-//        @Autowired
-//        DataSource dataSource;
-//
-//
-//        private boolean hasDatabase() {
-//            return !(null == dataSource);
-//        }
-//
-//        @Autowired
-//        public void setInfoProperties(ConfigurableEnvironment env) {
-//
-//            // Add the status to the /info endpoint using Properties
-//            Properties props = new Properties();
-//
-//            // Add the basic status of the resources
-//            if(null != dataSource) {
-//                props.put("info.hasdatabase", true);
-//            }
-//
-//            if(null != props) {
-//                // Make these properties will show up in Spring Boot Actuator's '/info' endpoint...
-//                env.getPropertySources().addFirst(new PropertiesPropertySource("extra-info-props", props));
-//            }
-//        }
-//    }
+        @GetMapping("/stb")
+        public String dashboard() {
+            LOG.error("Had a crisis...   :(   ");
+            return "index";
+        }
+    }
 }
