@@ -84,6 +84,7 @@
             <p th:each="uri : ${@environment.getProperty('cloud.application.application_uris')}"  th:text="'URI: '+${uri}"/>
         </div>
         <div th:unless="${@environment.acceptsProfiles('cloud')}" class="w3-center">
+            <!-- The abscence of this is TESTED FOR in the smoke test! -->
             <p>No Cloud Platform</p>
         </div>
     </div>
@@ -100,7 +101,10 @@
             <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.mysql.connection.scheme')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
+            <h3 class="w3-padding-16">Data</h3>
+            <!-- This is TESTED FOR in the smoke test! -->
             <p>No Data Service</p>
+
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
             <h3 class="w3-padding-16">Messaging</h3>
@@ -111,6 +115,8 @@
             <p th:text="'Host: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.host')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
+            <h3 class="w3-padding-16">Messaging</h3>
+            <!-- This is TESTED FOR in the smoke test! -->
             <p>No Messaging Service</p>
         </div>
     </div>
