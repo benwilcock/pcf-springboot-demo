@@ -13,7 +13,7 @@ resources:
     uri: https://github.com/benwilcock/pcf-springboot-demo
     branch: master
 
-- name: push
+- name: push-to-pws
   type: cf
   source:
     api: {{cf-endpoint}}
@@ -54,7 +54,7 @@ jobs:
     passed: [unit-test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
-  - put: push
+  - put: push-to-pws
     params:
       manifest: pcf-springboot-demo-source/manifest.yml
       path: package-output/pcf-springboot-demo.jar
@@ -74,7 +74,7 @@ jobs:
     passed: [unit-test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
-  - put: push
+  - put: push-to-pws
     params:
       manifest: pcf-springboot-demo-source/manifest-disconnected.yml
       path: package-output/pcf-springboot-demo.jar
