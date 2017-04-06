@@ -87,7 +87,7 @@ jobs:
   - task: test-disconnected
     file: pcf-springboot-demo-source/ci/tasks/web-test-connected.yml
     params:
-      URL: {{web-test-connected-url}}
+      URL: http://pcf-springboot-demo.cfapps.io
   - put: slack-alert
     params:
       text: |
@@ -105,7 +105,7 @@ jobs:
   - task: test-disconnected
     file: pcf-springboot-demo-source/ci/tasks/web-test-disconnected.yml
     params:
-      URL: {{web-test-disconnected-url}}
+      URL: http://pcf-springboot-demo-disconnected.cfapps.io
   - put: slack-alert
     params:
       text: |
