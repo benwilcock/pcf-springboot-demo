@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="/stylesheet.css"/>
 <body class="w3-content" style="max-width:1300px">
 
+<!--https://www.w3schools.com/w3css/tryw3css_templates_fifty.htm-->
+
 <div class="w3-row w3-black w3-padding-48">
     <div class="w3-half w3-container w3-center" id="title">
         <div>
@@ -105,8 +107,8 @@
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.rabbit.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.rabbit.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.rabbit.label')}"/>
-            <p th:text="'Host: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.host')}"/>
             <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.scheme')}"/>
+            <p th:text="'Host: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.host')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
             <p>No Messaging Service</p>
