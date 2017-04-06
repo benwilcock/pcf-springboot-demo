@@ -83,6 +83,25 @@ jobs:
       text: |
         The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME was pushed.
 
+
+- name: web_test_disconnected
+  public: true
+  plan:
+  - get: pcf-springboot-demo-source
+    trigger: true
+    passed: [package-disconnected]
+  - get: timer
+    trigger: true
+    passed: [package-disconnected]
+  - task: web_test_disconnected
+    file: pcf-springboot-demo-source/ci/tasks/web-test-disconnected.yml
+    params:
+      URL: {{web-test-disconnected-url}}
+  - put: slack-alert
+    params:
+      text: |
+        The web test for $BUILD_JOB_NAME has passed!
+
 #  SHPEC is proving to be a bit of a dissapointment.
 #  It's executing all shpec based tests in all folders, so the test stage always fails.
 #  Probably need to switch to something else for testing that's a bit more production ready.
@@ -106,20 +125,3 @@ jobs:
 #      text: |
 #        The smoke test for $BUILD_PIPELINE_NAME (connected) has passed.
 #
-#- name: smoke_test_disconnected
-#  public: true
-#  plan:
-#  - get: pcf-springboot-demo-source
-#    trigger: true
-#    passed: [deploy]
-#  - get: 24h
-#    trigger: true
-#    passed: [deploy]
-#  - task: smoke_test_disconnected
-#    file: pcf-springboot-demo-source/ci/tasks/smoke-test-disconnected.yml
-#    params:
-#      URL: {{smoke-test-disconnected-url}}
-#  - put: slack-alert
-#    params:
-#      text: |
-#        The smoke test for $BUILD_PIPELINE_NAME (disconnected) has passed.
