@@ -43,7 +43,7 @@ jobs:
   - task: test
     file: pcf-springboot-demo-source/ci/tasks/unit-test.yml
 
-- name: package-connected
+- name: push-connected
   public: true
   plan:
   - get: pcf-springboot-demo-source
@@ -63,7 +63,7 @@ jobs:
       text: |
         The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME was pushed.
 
-- name: package-disconnected
+- name: push-disconnected
   public: true
   plan:
   - get: pcf-springboot-demo-source
@@ -84,16 +84,16 @@ jobs:
         The $BUILD_PIPELINE_NAME.$BUILD_JOB_NAME was pushed.
 
 
-- name: web_test_disconnected
+- name: test-disconnected
   public: true
   plan:
   - get: pcf-springboot-demo-source
     trigger: true
-    passed: [package-disconnected]
+    passed: [push-disconnected]
   - get: timer
     trigger: true
-    passed: [package-disconnected]
-  - task: web_test_disconnected
+    passed: [push-disconnected]
+  - task: test-disconnected
     file: pcf-springboot-demo-source/ci/tasks/web-test-disconnected.yml
     params:
       URL: {{web-test-disconnected-url}}
