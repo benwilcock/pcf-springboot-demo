@@ -33,7 +33,7 @@ resources:
     insecure: true
 
 jobs:
-- name: test
+- name: unit-test
   public: true
   plan:
   - get: pcf-springboot-demo-source
@@ -41,17 +41,17 @@ jobs:
   - get: timer
     trigger: true
   - task: test
-    file: pcf-springboot-demo-source/ci/tasks/test.yml
+    file: pcf-springboot-demo-source/ci/tasks/unit-test.yml
 
 - name: package-connected
   public: true
   plan:
   - get: pcf-springboot-demo-source
     trigger: true
-    passed: [test]
+    passed: [unit-test]
   - get: timer
     trigger: true
-    passed: [test]
+    passed: [unit-test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
   - put: push
@@ -68,10 +68,10 @@ jobs:
   plan:
   - get: pcf-springboot-demo-source
     trigger: true
-    passed: [test]
+    passed: [unit-test]
   - get: timer
     trigger: true
-    passed: [test]
+    passed: [unit-test]
   - task: package
     file: pcf-springboot-demo-source/ci/tasks/package.yml
   - put: push
@@ -98,7 +98,7 @@ jobs:
 #    trigger: true
 #    passed: [package-connected]
 #  - task: smoke_test
-#    file: pcf-springboot-demo-source/ci/tasks/smoke-test.yml
+#    file: pcf-springboot-demo-source/ci/tasks/smoke-unit-test.yml
 #    params:
 #      URL: {{smoke-test-url}}
 #  - put: slack-alert
