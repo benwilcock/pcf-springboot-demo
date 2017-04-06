@@ -12,7 +12,7 @@ fi
 if curl -s "$URL" | grep "No Data Service"
 then
     # if the keyword is in the conent
-    echo " the website is working fine"
+    echo "The website [$URL] is working fine"
     exit 0
 else
     echo "Error"
