@@ -62,11 +62,11 @@
 
 <!-- First Grid: Actuator Endpoints -->
 <div class="w3-row">
-    <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-half w3-deep-purple w3-container w3-center" style="min-height:700px" id="cloud">
+    <div class="w3-half w3-deep-purple w3-container w3-center" style="min-height:700px" id="cloud">
         <div class="w3-padding-64">
             <h1>Cloud</h1>
         </div>
-        <div class="w3-center">
+        <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
             <p th:text="'Foundation: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
             <p th:text="'App Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
             <p th:text="'App Id: ' + ${@environment.getProperty('INSTANCE_GUID')}"/>
@@ -75,15 +75,37 @@
             <p th:text="'App URI: ' + ${@environment.getProperty('vcap.application.uris')}"/>
             <p th:text="'App Memory: ' + ${@environment.getProperty('vcap.application.limits.mem')}"/>
             <p th:text="'App Storage: ' + ${@environment.getProperty('vcap.application.limits.disk')} + ' (ephem)'"/>
+            <p th:each="uri : ${@environment.getProperty('cloud.application.application_uris')}"  th:text="'Uri: '+${uri}"/>
+        </div>
+        <div th:unless="${@environment.acceptsProfiles('cloud')}" class="w3-center">
+            <p>Unavailable</p>
         </div>
     </div>
 
-    <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-half w3-deep-purple w3-container w3-center" style="min-height:700px" id="database">
+    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:700px" id="Services">
         <div class="w3-padding-64">
-            <h1>Database</h1>
+            <h1>Services</h1>
         </div>
-        <div class="w3-center">
+        <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
+            <h3>Data</h3>
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.mysql.id')}"/>
+            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.mysql.plan')}"/>
+            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.mysql.label')}"/>
+            <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.mysql.connection.scheme')}"/>
+        </div>
+        <div th:unless="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
+            <p>No Data</p>
+        </div>
+        <div th:if="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
+            <h3>Messaging</h3>
+            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.rabbit.id')}"/>
+            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.rabbit.plan')}"/>
+            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.rabbit.label')}"/>
+            <p th:text="'Host: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.host')}"/>
+            <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.scheme')}"/>
+        </div>
+        <div th:unless="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
+            <p>No Messaging</p>
         </div>
     </div>
 </div>
