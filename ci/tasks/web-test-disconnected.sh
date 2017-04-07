@@ -39,4 +39,14 @@ else
     echo "The website [$URL] does not show 'No Cloud Platform' (this was expected)."
 fi
 
+# Make sure the homepage shows there is a String Application Name present...
+
+if curl -s "$URL/name" | grep "pcf-springboot-demo"
+then
+    echo "The website [$URL/name] shows 'pcf-springboot-demo' (as expected)."
+else
+    echo "Error. Not showing 'pcf-springboot-demo' on [$URL/name]"
+    exit 1
+fi
+
 exit 0

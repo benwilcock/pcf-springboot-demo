@@ -29,7 +29,7 @@
             <h1>Application</h1>
         </div>
         <div class="w3-center">
-            <p th:text="'Name: ' + ${@environment.getProperty('spring.applicationName')}"/>
+            <p th:text="'Name: ' + ${@environment.getProperty('spring.application.name')}"/>
             <p th:each="activeprofile : ${@environment.getActiveProfiles()}"  th:text="'Active Profile: '+${activeprofile}"/>
             <p th:text="'Version: ' + ${@buildProperties.getVersion()}"/>
             <p th:text="'Build Date: ' + ${@buildProperties.getTime()}"/>

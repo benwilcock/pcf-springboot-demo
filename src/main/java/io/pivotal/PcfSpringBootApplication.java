@@ -2,10 +2,15 @@ package io.pivotal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.Map;
 
 
 @SpringBootApplication
@@ -20,20 +25,34 @@ public class PcfSpringBootApplication {
     }
 
     @Controller
-    class dashboardController {
+    class MainController {
 
         @GetMapping("/")
-        public String dashboard() {
+        public String index() {
+            LOG.info("A request has been received for the Index page.");
             return "index";
         }
     }
 
+    @org.springframework.web.bind.annotation.RestController
+    class RestController {
+
+        @Value("${spring.application.name}")
+        String appName;
+
+        @GetMapping("/name")
+        public Map<String, String> get() {
+            LOG.info("A request has been received for the /name REST endpoint.");
+            return Collections.singletonMap("applicationName", appName);
+        }
+    }
+
     @Controller
-    class stbController {
+    class StbController {
 
         @GetMapping("/stb")
         public String stb() {
-            LOG.error("Had a crisis...   :(   ", new OutOfMemoryError("Fake OutOfMemoryError!"));
+            LOG.error("Had a crisis...   :(   ", new OutOfMemoryError("Threw a fake OutOfMemory error!!!"));
             System.exit(-1);
             return "index";
         }
