@@ -94,14 +94,14 @@
             <h1>Data Services</h1>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Data</h3>
+            <h3 class="">Data</h3>
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.mysql.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.mysql.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.mysql.label')}"/>
             <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.mysql.connection.scheme')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Data</h3>
+            <h3 class="">Data</h3>
             <!-- This is TESTED FOR in the smoke test! -->
             <p>No Data Service</p>
 
@@ -126,18 +126,29 @@
 <div class="w3-row">
     <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:700px" id="moreServices">
         <div class="w3-padding-48">
-        <h1>Application Services</h1>
+            <h1>Application Services</h1>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Registry</h3>
+            <h3 class="">Registry</h3>
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.registry.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.registry.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.registry.label')}"/>
             <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.registry.tags')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Registry</h3>
+            <h3 class="">Registry</h3>
             <p>No Registry Service</p>
+        </div>
+        <div th:if="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
+            <h3 class="w3-padding-16">Configuration</h3>
+            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.registry.id')}"/>
+            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.registry.plan')}"/>
+            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.registry.label')}"/>
+            <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.registry.tags')}"/>
+        </div>
+        <div th:unless="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
+            <h3 class="w3-padding-16">Configuration</h3>
+            <p>No Config Service</p>
         </div>
     </div>
 </div>
