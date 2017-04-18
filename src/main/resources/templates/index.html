@@ -91,7 +91,7 @@
 
     <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:700px" id="Services">
         <div class="w3-padding-48">
-            <h1>Services</h1>
+            <h1>Data Services</h1>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
             <h3 class="w3-padding-16">Data</h3>
@@ -121,6 +121,30 @@
         </div>
     </div>
 </div>
+
+
+<div class="w3-row">
+    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:700px" id="moreServices">
+        <div class="w3-padding-48">
+        <h1>Application Services</h1>
+        </div>
+        <div th:if="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
+            <h3 class="w3-padding-16">Registry</h3>
+            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.registry.id')}"/>
+            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.registry.plan')}"/>
+            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.registry.label')}"/>
+            <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.registry.tags')}"/>
+        </div>
+        <div th:unless="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
+            <h3 class="w3-padding-16">Registry</h3>
+            <p>No Registry Service</p>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 </body>
 <!-- Footer -->
