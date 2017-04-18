@@ -39,6 +39,16 @@ else
     exit 1
 fi
 
+# Make sure the homepage shows there is NO Config Service bound...
+
+if curl -s "$URL" | grep "Ident: config"
+then
+    echo "The website [$URL] shows 'Ident: config' (as expected)."
+else
+    echo "Error. Not showing 'Ident: config' on [$URL]"
+    exit 1
+fi
+
 # Make sure the homepage shows there is a Cloud Platform present...
 
 if curl -s "$URL" | grep "API: https://api.run.pivotal.io"

@@ -39,6 +39,16 @@ else
     exit 1
 fi
 
+# Make sure there the homepage shows there is NO Config Service bound...
+
+if curl -s "$URL" | grep "No Config Service"
+then
+    echo "The website [$URL] shows 'No Config Service' (as expected)."
+else
+    echo "Error. Unexpected Config Service bound to [$URL]"
+    exit 1
+fi
+
 # Make sure there the homepage shows there is a Cloud Platform present...
 
 if curl -s "$URL" | grep "No Cloud Platform"

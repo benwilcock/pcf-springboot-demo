@@ -141,10 +141,10 @@
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
             <h3 class="w3-padding-16">Configuration</h3>
-            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.registry.id')}"/>
-            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.registry.plan')}"/>
-            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.registry.label')}"/>
-            <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.registry.tags')}"/>
+            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.config.id')}"/>
+            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.config.plan')}"/>
+            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.config.label')}"/>
+            <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.config.tags')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
             <h3 class="w3-padding-16">Configuration</h3>
