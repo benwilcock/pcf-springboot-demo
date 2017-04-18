@@ -3,6 +3,7 @@ buildscript {
 		springBootVersion = '1.5.2.RELEASE'
 		springDepVersion = '0.5.2.RELEASE'
 		sleuthVersion = '1.1.3.RELEASE'
+		configVersion = '1.3.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -31,6 +32,7 @@ repositories {
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-sleuth:${sleuthVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-config:${configVersion}"
 	}
 }
 
@@ -41,6 +43,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.cloud:spring-cloud-starter-sleuth')
+	compile('org.springframework.cloud:spring-cloud-starter-config')
 
 	//Test tools....
 	testCompile('org.springframework.boot:spring-boot-starter-test')

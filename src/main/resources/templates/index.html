@@ -60,7 +60,7 @@
             <a href="/metrics" class="w3-button w3-block w3-hover-amber w3-padding-16">/Metrics</a>
             <a href="/loggers" class="w3-button w3-block w3-hover-amber w3-padding-16">/Loggers</a>
             <a href="/trace" class="w3-button w3-block w3-hover-amber w3-padding-16">/Trace</a>
-            <!--<small><p>To disable Actuator security, set <pre>management.security.enabled=false</pre> in <pre>application.properties</pre>.</p></small>-->
+            <!--<small><p>To disable Actuator security, set <pre>management.security.enabled=false</pre> in <bootstrap.propertiesties</pre>.</p></small>-->
             <small class="w3-button w3-block w3-hover-amber w3-padding-16"
                th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
         </div>
