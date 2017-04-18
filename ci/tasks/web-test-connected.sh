@@ -29,6 +29,16 @@ else
     exit 1
 fi
 
+# Make sure the homepage shows there is NO Registry Service bound...
+
+if curl -s "$URL" | grep "Ident: registry"
+then
+    echo "The website [$URL] shows 'Ident: registry' (as expected)."
+else
+    echo "Error. Not showing 'Ident: registry' on [$URL]"
+    exit 1
+fi
+
 # Make sure the homepage shows there is a Cloud Platform present...
 
 if curl -s "$URL" | grep "API: https://api.run.pivotal.io"

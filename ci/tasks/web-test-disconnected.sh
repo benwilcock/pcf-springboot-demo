@@ -29,6 +29,16 @@ else
     exit 1
 fi
 
+# Make sure there the homepage shows there is NO Registry Service bound...
+
+if curl -s "$URL" | grep "No Registry Service"
+then
+    echo "The website [$URL] shows 'No Registry Service' (as expected)."
+else
+    echo "Error. Unexpected Registry Service bound to [$URL]"
+    exit 1
+fi
+
 # Make sure there the homepage shows there is a Cloud Platform present...
 
 if curl -s "$URL" | grep "No Cloud Platform"
