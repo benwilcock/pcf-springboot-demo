@@ -61,9 +61,9 @@ fi
 
 # Make sure the homepage shows there is a String Application Name present...
 
-if curl -s "$URL/name" | grep "pcf-springboot-demo"
+if curl -s "$URL/rest" | grep "pcf-springboot-demo"
 then
-    echo "The website [$URL/name] shows 'pcf-springboot-demo' (as expected)."
+    echo "The website [$URL/rest] shows 'pcf-springboot-demo' (as expected)."
 else
     echo "Error. Not showing 'pcf-springboot-demo' on [$URL/name]"
     exit 1
