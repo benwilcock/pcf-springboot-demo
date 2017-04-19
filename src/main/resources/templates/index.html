@@ -157,9 +157,9 @@
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.config.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.config.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.config.label')}"/>
-            <p th:text="'Your host is: ' + ${@environment.getProperty('your.host.is')}"/>
+            <p th:text="'Your host today is: ' + ${@environment.getProperty('your.host.is')}"/>
             <form method="POST" th:action="@{/refresh}">
-                <button type="submit" name="submit" value="value" class="w3-button w3-block w3-hover-amber w3-padding-8">[ Refresh Config ]</button>
+                <button type="submit" name="submit" value="value" class="w3-button w3-block w3-hover-amber w3-padding-8">[ Refresh The Config ]</button>
             </form>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
