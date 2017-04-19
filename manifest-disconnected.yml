@@ -1,5 +1,5 @@
 applications:
 - name: pcf-springboot-demo-disconnected
-  memory: 512M
-  disk_quota: 512M
+  memory: 1G
+  disk_quota: 1G
   path: build/libs/pcf-springboot-demo-0.0.1-SNAPSHOT.jar

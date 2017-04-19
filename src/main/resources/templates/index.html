@@ -5,14 +5,15 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="/stylesheet.css"/>
-<body class="w3-content" style="max-width:1300px">
+<body class="w3-content w3-black" style="max-width:1300px">
 
-<!--https://www.w3schools.com/w3css/tryw3css_templates_fifty.htm-->
+<!-- Style from https://www.w3schools.com/w3css/tryw3css_templates_fifty.htm -->
 
-<div class="w3-row w3-black w3-padding-48">
+<!-- Header Row: Spring Boot Logo -->
+<div class="w3-row w3-dark-teal w3-padding-48">
     <div class="w3-half w3-container w3-center" id="title">
         <div>
-            <h1>SpringBoot Info</h1>
+            <h1>SpringBoot Env Info</h1>
         </div>
     </div>
     <div class="w3-half w3-container w3-center w3-cell-middle" id="logo">
@@ -22,10 +23,10 @@
     </div>
 </div>
 
-<!-- Second Grid: Configuration Tips -->
+<!-- First Row: Application and Actuator -->
 <div class="w3-row">
-    <div class="w3-half w3-teal w3-container w3-center" style="height:700px" id="app">
-        <div class="w3-padding-48">
+    <div class="w3-half w3-teal w3-container w3-center" style="height:600px" id="app">
+        <div class="w3-padding-32">
             <h1>Application</h1>
         </div>
         <div class="w3-center">
@@ -40,37 +41,34 @@
             <p th:text="'Java Runtime: ' + ${@environment.getProperty('java.runtime.name')}"/>
             <p th:text="'Java Variant: ' + ${@environment.getProperty('java.vm.name')}"/>
             <p th:text="'Java Version: ' + ${@environment.getProperty('java.runtime.version')}"/>
-
-            <!--<p th:each="defaultprofile : ${@environment.getDefaultProfiles()}"  th:text="'Default Profile: '+${defaultprofile}"/>-->
-            <!--<p th:text="'Has Database: ' + ${@environment.getProperty('info.hasdatabase')}"/>-->
-            <!--<p th:text="'Has Messaging: ' + ${@environment.getProperty('info.hasmessaging')}"/>-->
+            <a href="/rest" class="w3-button w3-block w3-hover-amber w3-padding-8">[Test Rest Endpoint]</a>
         </div>
     </div>
 
-    <div class="w3-half w3-green w3-container w3-center" style="height:700px" id="standard">
-        <div class="w3-padding-48">
+    <div class="w3-half w3-green w3-container w3-center" style="height:600px" id="standard">
+        <div class="w3-padding-32">
             <h1>Actuator</h1>
         </div>
         <div class="w3-center">
-            <a href="/info" class="w3-button w3-block w3-hover-teal w3-padding-16">/Info</a>
-            <a href="/health" class="w3-button w3-block w3-hover-teal w3-padding-16">/Health</a>
-            <a href="/env" class="w3-button w3-block w3-hover-amber w3-padding-16">/Env</a>
-            <a href="/configprops" class="w3-button w3-block w3-hover-amber w3-padding-16">/ConfigProps</a>
-            <a href="/beans" class="w3-button w3-block w3-hover-amber w3-padding-16">/Beans</a>
-            <a href="/metrics" class="w3-button w3-block w3-hover-amber w3-padding-16">/Metrics</a>
-            <a href="/loggers" class="w3-button w3-block w3-hover-amber w3-padding-16">/Loggers</a>
-            <a href="/trace" class="w3-button w3-block w3-hover-amber w3-padding-16">/Trace</a>
-            <!--<small><p>To disable Actuator security, set <pre>management.security.enabled=false</pre> in <bootstrap.propertiesties</pre>.</p></small>-->
-            <small class="w3-button w3-block w3-hover-amber w3-padding-16"
+            <a href="/info" class="w3-button w3-block w3-hover-teal w3-padding-8">/Info</a>
+            <a href="/health" class="w3-button w3-block w3-hover-teal w3-padding-8">/Health</a>
+            <a href="/env" class="w3-button w3-block w3-hover-amber w3-padding-8">/Env</a>
+            <a href="/configprops" class="w3-button w3-block w3-hover-amber w3-padding-8">/ConfigProps</a>
+            <a href="/beans" class="w3-button w3-block w3-hover-amber w3-padding-8">/Beans</a>
+            <a href="/metrics" class="w3-button w3-block w3-hover-amber w3-padding-8">/Metrics</a>
+            <a href="/loggers" class="w3-button w3-block w3-hover-amber w3-padding-8">/Loggers</a>
+            <a href="/trace" class="w3-button w3-block w3-hover-amber w3-padding-8">/Trace</a>
+
+            <small class="w3-button w3-block w3-hover-amber w3-padding-8"
                th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
         </div>
     </div>
 </div>
 
-<!-- First Grid: Actuator Endpoints -->
+<!-- Second Row: Cloud and Data Services -->
 <div class="w3-row">
-    <div class="w3-half w3-deep-purple w3-container w3-center" style="min-height:700px" id="cloud">
-        <div class="w3-padding-48">
+    <div class="w3-half w3-deep-purple w3-container w3-center" style="min-height:600px" id="cloud">
+        <div class="w3-padding-32">
             <h1>Cloud</h1>
         </div>
         <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
@@ -89,25 +87,25 @@
         </div>
     </div>
 
-    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:700px" id="Services">
-        <div class="w3-padding-48">
+    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:600px" id="Services">
+        <div class="w3-padding-32">
             <h1>Data Services</h1>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <h3 class="">Data</h3>
+            <h4 class="">Data</h4>
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.mysql.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.mysql.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.mysql.label')}"/>
             <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.mysql.connection.scheme')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <h3 class="">Data</h3>
+            <h4 class="">Data</h4>
             <!-- This is TESTED FOR in the smoke test! -->
             <p>No Data Service</p>
 
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Messaging</h3>
+            <h4 class="w3-padding-16">Messaging</h4>
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.rabbit.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.rabbit.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.rabbit.label')}"/>
@@ -115,7 +113,7 @@
             <p th:text="'Host: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.host')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Messaging</h3>
+            <h4 class="w3-padding-16">Messaging</h4>
             <!-- This is TESTED FOR in the smoke test! -->
             <p>No Messaging Service</p>
         </div>
@@ -123,31 +121,38 @@
 </div>
 
 
+
+<!-- Third Row: Application Services -->
 <div class="w3-row">
-    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:700px" id="moreServices">
-        <div class="w3-padding-48">
+    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:600px" id="moreServices">
+        <div class="w3-padding-32">
             <h1>Application Services</h1>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
-            <h3 class="">Registry</h3>
+            <h4 class="">Registry</h4>
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.registry.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.registry.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.registry.label')}"/>
             <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.registry.tags')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
-            <h3 class="">Registry</h3>
+            <h4 class="">Registry</h4>
+            <!-- This is TESTED FOR in the smoke test! -->
             <p>No Registry Service</p>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Configuration</h3>
+            <h4 class="w3-padding-16">Configuration</h4>
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.config.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.config.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.config.label')}"/>
-            <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.config.tags')}"/>
+            <p th:text="'Your host is: ' + ${@environment.getProperty('your.host.is')}"/>
+            <form method="POST" th:action="@{/refresh}">
+                <button type="submit" name="submit" value="value" class="w3-button w3-block w3-hover-amber w3-padding-8">[ Refresh Config ]</button>
+            </form>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
-            <h3 class="w3-padding-16">Configuration</h3>
+            <h4 class="w3-padding-16">Configuration</h4>
+            <!-- This is TESTED FOR in the smoke test! -->
             <p>No Config Service</p>
         </div>
     </div>
@@ -162,7 +167,7 @@
 <footer class="w3-container w3-black w3-padding-16">
     <p>
         <a href="https://www.w3schools.com/w3css/default.asp" class="w3-button w3-black w3-block w3-hover-teal w3-padding-small" target="_blank">Powered by w3.css</a>
-        <a href="/stb" class="w3-text-red w3-button w3-black w3-block w3-hover-red w3-padding-small">[ KILL BUTTON ]</a>
+        <a href="/stb" class="w3-text-red w3-button w3-black w3-block w3-hover-red w3-padding-small">[ KILL SWITCH ]</a>
     </p>
 
 </footer>

@@ -1,25 +1,35 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.2.RELEASE'
-		springDepVersion = '0.5.2.RELEASE'
-		sleuthVersion = '1.1.3.RELEASE'
+        //springDepVersion = '0.6.1.RELEASE'
+        //springBootVersion = '1.4.5.RELEASE'
+		//sleuthVersion = '1.1.3.RELEASE'
 	}
 	repositories {
         mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("io.spring.gradle:dependency-management-plugin:${springDepVersion}")
+        //classpath("io.spring.gradle:dependency-management-plugin:${springDepVersion}")
+        //classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
 
 plugins {
-  id "com.gorylenko.gradle-git-properties" version "1.4.16"
+    id "com.gorylenko.gradle-git-properties" version "1.4.16"
+    id "io.spring.dependency-management" version "1.0.2.RELEASE"
+    id 'org.springframework.boot' version '1.5.2.RELEASE'
 }
 
 apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: "io.spring.dependency-management"
+//apply plugin: 'org.springframework.boot'
+//apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    imports {
+        //mavenBom "org.springframework.cloud:spring-cloud-sleuth:${sleuthVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR6"
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.4.1.RELEASE"
+    }
+}
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -28,19 +38,21 @@ repositories {
     mavenCentral()
 }
 
-dependencyManagement {
-	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-sleuth:${sleuthVersion}"
-	}
-}
-
 dependencies {
 	//Web tools...
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile("org.springframework.boot:spring-boot-devtools")
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.cloud:spring-cloud-starter-sleuth')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+
+    // Database (Required by SCS Connector if DB is bound to app in PCF)
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('com.h2database:h2')
+
+    // Spring Cloud
+    compile('org.springframework.cloud:spring-cloud-starter-sleuth')
+    compile("io.pivotal.spring.cloud:spring-cloud-services-starter-config-client")
+    compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
 
 	//Test tools....
 	testCompile('org.springframework.boot:spring-boot-starter-test')

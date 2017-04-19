@@ -5,11 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -34,16 +35,24 @@ public class PcfSpringBootApplication {
         }
     }
 
+    @RefreshScope
     @org.springframework.web.bind.annotation.RestController
     class RestController {
 
         @Value("${spring.application.name}")
         String appName;
 
-        @GetMapping("/name")
+        @Value("${your.host.is:Ben}")
+        String hostName;
+
+        @GetMapping("/rest")
         public Map<String, String> get() {
-            LOG.info("A request has been received for the /name REST endpoint.");
-            return Collections.singletonMap("applicationName", appName);
+            LOG.info("A request has been received for the /rest endpoint.");
+            Map<String, String> data = new HashMap<String, String>();
+            data.put("applicationName", appName);
+            data.put("yourHostIs", hostName);
+            LOG.debug("Returning {}.", data.toString());
+            return data;
         }
     }
 
