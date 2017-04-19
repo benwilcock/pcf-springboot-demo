@@ -68,7 +68,7 @@
             <h1>Cloud Platform</h1>
         </div>
         <div>
-            <img src="PivotalCloudFoundry.png" width="40%" height="40%"/>
+            <img src="PivotalCloudFoundry.png" width="50%" height="50%"/>
         </div>
         <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
             <p th:text="'API: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
@@ -86,12 +86,12 @@
         </div>
     </div>
 
-    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:600px" id="Services">
+    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:700px" id="Services">
         <div class="w3-padding-16">
             <h1>Data Services</h1>
         </div>
         <div>
-            <img src="PcfMySql.png" width="15%" height="15%"/>
+            <img src="PcfMySql.png" width="15%" height="15%" class="w3-padding-16"/>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
             <!--<h4 class="">Data</h4>-->
@@ -107,7 +107,7 @@
 
         </div>
         <div>
-            <img src="PcfRabbitMQ.png" width="15%" height="15%"/>
+            <img src="PcfRabbitMQ.png" width="15%" height="15%" class="w3-padding-16"/>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
             <!--<h4 class="w3-padding-16">Messaging</h4>-->
@@ -129,7 +129,7 @@
 
 <!-- Third Row: Application Services -->
 <div class="w3-row">
-    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:600px" id="app-services">
+    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:700px" id="app-services">
         <div class="w3-padding-16">
             <h1>Application Services</h1>
         </div>
