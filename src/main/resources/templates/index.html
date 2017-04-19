@@ -71,6 +71,9 @@
         <div class="w3-padding-32">
             <h1>Cloud</h1>
         </div>
+        <div>
+            <img src="PivotalCloudFoundry.png" width="30%" height="30%"/>
+        </div>
         <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
             <p th:text="'API: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
             <p th:text="'App Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
@@ -87,25 +90,31 @@
         </div>
     </div>
 
-    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:600px" id="Services">
+    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:600px" id="Services">
         <div class="w3-padding-32">
-            <h1>Data Services</h1>
+            <h1>Services</h1>
+        </div>
+        <div>
+            <img src="PcfMySql.png" width="10%" height="10%"/>
         </div>
         <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <h4 class="">Data</h4>
+            <!--<h4 class="">Data</h4>-->
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.mysql.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.mysql.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.mysql.label')}"/>
             <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.mysql.connection.scheme')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <h4 class="">Data</h4>
+            <!--<h4 class="">Data</h4>-->
             <!-- This is TESTED FOR in the smoke test! -->
             <p>No Data Service</p>
 
         </div>
+        <div>
+            <img src="PcfRabbitMQ.png" width="10%" height="10%"/>
+        </div>
         <div th:if="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
-            <h4 class="w3-padding-16">Messaging</h4>
+            <!--<h4 class="w3-padding-16">Messaging</h4>-->
             <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.rabbit.id')}"/>
             <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.rabbit.plan')}"/>
             <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.rabbit.label')}"/>
@@ -113,7 +122,7 @@
             <p th:text="'Host: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.host')}"/>
         </div>
         <div th:unless="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
-            <h4 class="w3-padding-16">Messaging</h4>
+            <!--<h4 class="w3-padding-16">Messaging</h4>-->
             <!-- This is TESTED FOR in the smoke test! -->
             <p>No Messaging Service</p>
         </div>
@@ -124,7 +133,7 @@
 
 <!-- Third Row: Application Services -->
 <div class="w3-row">
-    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:600px" id="moreServices">
+    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:600px" id="moreServices">
         <div class="w3-padding-32">
             <h1>Application Services</h1>
         </div>
