@@ -7,15 +7,17 @@
 <link rel="stylesheet" href="/stylesheet.css"/>
 <body class="w3-content w3-black" style="max-width:1300px">
 
-<!-- Style from https://www.w3schools.com/w3css/tryw3css_templates_fifty.htm -->
+<!-- Style from
+https://www.w3schools.com/w3css/tryw3css_templates_fifty.htm
+Font Segoe UI-->
 
 <!-- Header Row: Spring Boot Logo -->
 <div class="w3-row w3-lime">
-    <div class="w3-half w3-container w3-center w3-cell-middle" id="logo">
-        <img src="SpringBoot.png" width="100%" height="100%" class="w3-padding-24 w3-center"/>
+    <div class="w3-half w3-container w3-center" id="logo">
+        <img src="SpringBoot.png" width="100%" height="100%"/>
     </div>
-    <div class="w3-half w3-container w3-center" id="title">
-        <h1 class="w3-padding-48">Environment Info</h1>
+    <div class="w3-half w3-center w3-padding-48" id="title">
+        <h1 class="w3-text-black w3-animate-opacity">Environment Info</h1>
     </div>
 </div>
 
@@ -63,138 +65,116 @@
 
 <!-- Second Row: Cloud and Data Services -->
 <div class="w3-row">
-    <div class="w3-half w3-deep-purple w3-container w3-center" style="min-height:600px" id="cloud">
+    <div class="w3-half w3-deep-purple w3-container w3-center" style="min-height:900px" id="cloud">
         <div class="w3-padding-16">
             <h1>Cloud Platform</h1>
         </div>
-        <div>
-            <img src="PivotalCloudFoundry.png" width="50%" height="50%"/>
-        </div>
+
         <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
-            <p th:text="'API: ' + ${@environment.getProperty('cloud.application.cf_api')}"/>
-            <p th:text="'App Name: ' + ${@environment.getProperty('vcap.application.name')}"/>
-            <p th:text="'Ident: ' + ${@environment.getProperty('INSTANCE_GUID')}"/>
-            <p th:text="'Index: ' + ${@environment.getProperty('INSTANCE_INDEX')}"/>
-            <p th:text="'Space: ' + ${@environment.getProperty('vcap.application.space_name')}"/>
-            <p th:text="'Memory (MB): ' + ${@environment.getProperty('vcap.application.limits.mem')}"/>
-            <p th:text="'Storage (MB): ' + ${@environment.getProperty('vcap.application.limits.disk')} + ' [ephemeral]'"/>
-            <p th:each="uri : ${@environment.getProperty('cloud.application.application_uris')}"  th:text="'URI: '+${uri}"/>
+            <img src="PivotalCloudFoundry.png" style="width:50%" class="w3-padding-8"/>
+
+            <div class="w3-container w3-responsive w3-padding-24">
+                <table class="w3-table w3-center">
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">Application Name:</td>
+                        <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('vcap.application.name')}?:'not-found'"/></td>
+                    </tr>
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">Application Space:</td>
+                        <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('vcap.application.space_name')}?:'not-found'"/></td>
+                    </tr>
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">Instance GUID:</td>
+                        <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('INSTANCE_GUID')}?:'not-found'"/></td>
+                    </tr>
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">Instance INDEX:</td>
+                        <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('INSTANCE_INDEX')}?:'not-found'"/></td>
+                    </tr>
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">Memory (MB):</td>
+                        <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('vcap.application.limits.mem')}?:'not-found'"/></td>
+                    </tr>
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">Epemeral Disk (MB):</td>
+                        <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('vcap.application.limits.disk')}?:'not-found'"/></td>
+                    </tr>
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">Application URL:</td>
+                        <td class="w3-half w3-left-align">
+                            <!--<a th:href="@{${@environment.getProperty('vcap.application.application_uris[0]')}}">-->
+                            <a th:href="@{/}">
+                                <span th:text="'https://' + ${@environment.getProperty('vcap.application.application_uris[0]')}"/>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="w3-black">
+                        <td class="w3-half w3-right-align">API Endpoint:</td>
+                        <td class="w3-half w3-left-align">
+                            <span th:text="${@environment.getProperty('cloud.application.cf_api')}?:'not-found'"/></td>
+                    </tr>
+                </table>
+            </div>
         </div>
+
         <div th:unless="${@environment.acceptsProfiles('cloud')}" class="w3-center">
             <!-- The abscence of this is TESTED FOR in the smoke test! -->
             <p>No Cloud Platform</p>
         </div>
     </div>
 
-    <div class="w3-half w3-dark-grey w3-container w3-center" style="min-height:700px" id="Services">
+    <div class="w3-half w3-indigo w3-container w3-center" style="min-height:900px" id="cache-services">
         <div class="w3-padding-16">
-            <h1>Data Services</h1>
+            <h1>Attached Services</h1>
         </div>
-        <div>
-            <img src="PcfMySql.png" width="15%" height="15%" class="w3-padding-16"/>
-        </div>
-        <div th:if="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <!--<h4 class="">Data</h4>-->
-            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.mysql.id')}"/>
-            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.mysql.plan')}"/>
-            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.mysql.label')}"/>
-            <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.mysql.connection.scheme')}"/>
-        </div>
-        <div th:unless="${@environment.containsProperty('cloud.services.mysql.id')}" class="w3-center">
-            <!--<h4 class="">Data</h4>-->
-            <!-- This is TESTED FOR in the smoke test! -->
-            <p>No Data Service</p>
 
+        <div class="w3-row">
+            <div th:if="${@environment.getProperty('cloud.services.mysql.id')}" class="w3-half w3-center">
+                <img src="PcfMySQL.png" width="50%" height="50%" class="w3-padding-32"/>
+                <h6>MySQL</h6>
+            </div>
+            <div th:if="${@environment.getProperty('cloud.services.redis.id')}" class="w3-half w3-center">
+                <img src="PcfRedis.png" width="50%" height="50%" class="w3-padding-32"/>
+                <h6>Redis</h6>
+            </div>
         </div>
-        <div>
-            <img src="PcfRabbitMQ.png" width="15%" height="15%" class="w3-padding-16"/>
+        <div class="w3-row">
+            <div th:if="${@environment.getProperty('cloud.services.rabbit.id')}" class="w3-half w3-center">
+                <img src="PcfRabbitMQ.png" width="50%" height="50%" class="w3-padding-32"/>
+                <h6>Rabbit MQ</h6>
+            </div>
+            <div th:if="${@environment.getProperty('cloud.services.config.id')}" class="w3-half w3-center">
+                <img src="PcfConfigServer.png" width="50%" height="50%" class="w3-padding-32"/>
+                <h6>Config Server</h6>
+            </div>
         </div>
-        <div th:if="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
-            <!--<h4 class="w3-padding-16">Messaging</h4>-->
-            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.rabbit.id')}"/>
-            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.rabbit.plan')}"/>
-            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.rabbit.label')}"/>
-            <p th:text="'Scheme: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.scheme')}"/>
-            <p th:text="'Host: ' + ${@environment.getProperty('cloud.services.rabbitmq.connection.host')}"/>
-        </div>
-        <div th:unless="${@environment.containsProperty('cloud.services.rabbit.id')}" class="w3-center">
-            <!--<h4 class="w3-padding-16">Messaging</h4>-->
-            <!-- This is TESTED FOR in the smoke test! -->
-            <p>No Messaging Service</p>
+        <div class="w3-row">
+            <div th:if="${@environment.getProperty('cloud.services.registry.id')}" class="w3-half w3-center">
+                <img src="PcfRegistryServer.png" width="50%" height="50%" class="w3-padding-32"/>
+                <h6>Service Registry</h6>
+            </div>
+            <div th:if="${@environment.getProperty('cloud.services.breaker.id')}" class="w3-half w3-center">
+                <img src="PcfCircuitBreakerDashboard.png" width="50%" height="50%" class="w3-padding-32"/>
+                <h6>Circuit Breaker Dashboard</h6>
+            </div>
         </div>
     </div>
 </div>
-
-
-
-<!-- Third Row: Application Services -->
-<div class="w3-row">
-    <div class="w3-half w3-deep-orange w3-container w3-center" style="min-height:700px" id="app-services">
-        <div class="w3-padding-16">
-            <h1>Application Services</h1>
-        </div>
-        <div>
-            <img src="PcfRegistryServer.png" width="15%" height="15%" class="w3-padding-16"/>
-        </div>
-        <div th:if="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
-            <!--<h4 class="">Registry</h4>-->
-            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.registry.id')}"/>
-            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.registry.plan')}"/>
-            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.registry.label')}"/>
-            <p th:text="'Tags: ' + ${@environment.getProperty('vcap.services.registry.tags')}"/>
-        </div>
-        <div th:unless="${@environment.containsProperty('cloud.services.registry.id')}" class="w3-center">
-            <!--<h4 class="">Registry</h4>-->
-            <!-- This is TESTED FOR in the smoke test! -->
-            <p>No Registry Service</p>
-        </div>
-
-        <div>
-            <img src="PcfConfigServer.png" width="15%" height="15%" class="w3-padding-16"/>
-        </div>
-        <div th:if="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
-            <!--<h4 class="w3-padding-16">Configuration</h4>-->
-            <p th:text="'Ident: ' + ${@environment.getProperty('cloud.services.config.id')}"/>
-            <p th:text="'Plan: ' + ${@environment.getProperty('vcap.services.config.plan')}"/>
-            <p th:text="'Label: ' + ${@environment.getProperty('vcap.services.config.label')}"/>
-            <p th:text="'Your host today is: ' + ${@environment.getProperty('your.host.is')}"/>
-            <form method="POST" th:action="@{/refresh}">
-                <button type="submit" name="submit" value="value" class="w3-button w3-block w3-hover-amber w3-padding-8">[ Refresh The Config ]</button>
-            </form>
-        </div>
-        <div th:unless="${@environment.containsProperty('cloud.services.config.id')}" class="w3-center">
-            <!--<h4 class="w3-padding-16">Configuration</h4>-->
-            <!-- This is TESTED FOR in the smoke test! -->
-            <p>No Config Service</p>
-        </div>
-    </div>
-
-    <div class="w3-half w3-indigo w3-container w3-center" style="min-height:600px" id="cache-services">
-        <div class="w3-padding-16">
-            <h1>Caching Services</h1>
-        </div>
-        <div>
-            <img src="PcfRedis.png" width="15%" height="15%" class="w3-padding-16"/>
-        </div>
-        <p>No Redis Service</p>
-        <div>
-            <img src="PivCloudCache.png" width="15%" height="15%" class="w3-padding-16"/>
-        </div>
-        <p>No Cloud Cache Service</p>
-    </div>
-</div>
-
-
-
-
 
 </body>
 <!-- Footer -->
-<footer class="w3-container w3-black w3-padding-16">
-    <p>
-        <a href="https://www.w3schools.com/w3css/default.asp" class="w3-button w3-black w3-block w3-hover-teal w3-padding-small" target="_blank">Powered by w3.css</a>
-        <a href="/stb" class="w3-text-red w3-button w3-black w3-block w3-hover-red w3-padding-small">[ KILL SWITCH ]</a>
-    </p>
-
+<footer class="w3-container w3-black">
+    <div class="w3-row">
+        <div class="w3-half w3-center" style="min-height:32px" id="footer-left">
+            <a href="https://www.w3schools.com/w3css/default.asp" class="w3-button w3-black w3-block w3-hover-teal w3-padding-small" target="_blank">Powered by w3.css</a>
+            <a href="/stb" class="w3-text-red w3-button w3-black w3-block w3-hover-red w3-padding-small">[ KILL THIS APPLICATION INSTANCE ]</a>
+        </div>
+        <div class="w3-half w3-center" style="min-height:32px" id="footer-right">
+            <form method="POST" th:action="@{/refresh}">
+                <span th:text="'Your host today is: ' + ${@environment.getProperty('your.host.is')}" class="w3-button w3-black w3-block w3-hover-teal w3-padding-small"/>
+                <button type="submit" name="submit" value="value" class="w3-text-red w3-button w3-black w3-block w3-hover-red w3-padding-small">[ REFRESH THE CONFIG ]</button>
+            </form>
+        </div>
+    </div>
 </footer>
 </html>

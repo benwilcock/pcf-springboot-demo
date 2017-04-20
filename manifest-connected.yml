@@ -9,6 +9,8 @@ applications:
     - rabbit
     - config
     - registry
+    - redis
+    - breaker
 
 #  env:
 #    JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=n,address=2.101.163.21:5005

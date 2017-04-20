@@ -9,53 +9,73 @@ if [ -z $URL ]; then
   exit 1
 fi
 
-# Make sure the homepage shows there is NO Data Service bound...
+# Make sure the homepage shows there is a DataBase Service bound...
 
-if curl -s "$URL" | grep "Ident: mysql"
+if curl -s "$URL" | grep "MySQL"
 then
-    echo "The website [$URL] shows 'Ident: mysql' (as expected)."
+    echo "The website [$URL] shows 'MySQL' (as expected)."
 else
-    echo "Error. Not showing 'Ident: mysql' on [$URL]"
+    echo "Error. Not showing 'MySQL' on [$URL]"
     exit 1
 fi
 
-# Make sure the homepage shows there is NO Messaging Service bound...
+# Make sure the homepage shows there is a Messaging Service bound...
 
-if curl -s "$URL" | grep "Ident: rabbit"
+if curl -s "$URL" | grep "Rabbit MQ"
 then
-    echo "The website [$URL] shows 'Ident: rabbit' (as expected)."
+    echo "The website [$URL] shows 'Rabbit MQ' (as expected)."
 else
-    echo "Error. Not showing 'Ident: rabbit' on [$URL]"
+    echo "Error. Not showing 'Rabbit MQ' on [$URL]"
     exit 1
 fi
 
-# Make sure the homepage shows there is NO Registry Service bound...
+# Make sure the homepage shows there is a Cache Service bound...
 
-if curl -s "$URL" | grep "Ident: registry"
+if curl -s "$URL" | grep "Redis"
 then
-    echo "The website [$URL] shows 'Ident: registry' (as expected)."
+    echo "The website [$URL] shows 'Redis' (as expected)."
 else
-    echo "Error. Not showing 'Ident: registry' on [$URL]"
+    echo "Error. Not showing 'Redis' on [$URL]"
     exit 1
 fi
 
-# Make sure the homepage shows there is NO Config Service bound...
+# Make sure the homepage shows there is a Registry Service bound...
 
-if curl -s "$URL" | grep "Ident: config"
+if curl -s "$URL" | grep "Service Registry"
 then
-    echo "The website [$URL] shows 'Ident: config' (as expected)."
+    echo "The website [$URL] shows 'Registry' (as expected)."
 else
-    echo "Error. Not showing 'Ident: config' on [$URL]"
+    echo "Error. Not showing 'Registry' on [$URL]"
+    exit 1
+fi
+
+# Make sure the homepage shows there is a Config Service bound...
+
+if curl -s "$URL" | grep "Config Server"
+then
+    echo "The website [$URL] shows 'Config' (as expected)."
+else
+    echo "Error. Not showing 'Config' on [$URL]"
+    exit 1
+fi
+
+# Make sure the homepage shows there is a Circuit Breaker Dashboard bound...
+
+if curl -s "$URL" | grep "Circuit Breaker Dashboard"
+then
+    echo "The website [$URL] shows 'Circuit Breaker Dashboard' (as expected)."
+else
+    echo "Error. Not showing 'Circuit Breaker Dashboard' on [$URL]"
     exit 1
 fi
 
 # Make sure the homepage shows there is a Cloud Platform present...
 
-if curl -s "$URL" | grep "API: https://api.run.pivotal.io"
+if curl -s "$URL" | grep "Instance GUID"
 then
-    echo "The website [$URL] shows 'API: https://api.run.pivotal.io' (as expected)."
+    echo "The website [$URL] shows 'Instance GUID' (as expected)."
 else
-    echo "Error. Not showing 'API: https://api.run.pivotal.io' on [$URL]"
+    echo "Error. Not showing 'Instance GUID' on [$URL]"
     exit 1
 fi
 
