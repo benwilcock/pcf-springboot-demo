@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <link rel="stylesheet" href="/stylesheet.css"/>
-<body class="w3-content w3-black" style="max-width:1300px">
+<body class="w3-content w3-lime" style="max-width:1300px">
 
 <!-- Style from
 https://www.w3schools.com/w3css/tryw3css_templates_fifty.htm
@@ -13,11 +13,17 @@ Font Segoe UI-->
 
 <!-- Header Row: Spring Boot Logo -->
 <div class="w3-row w3-lime">
-    <div class="w3-half w3-container w3-center" id="logo">
-        <img src="SpringBoot.png" width="100%" height="100%"/>
+    <div class="w3-half w3-container w3-center w3-padding-16" id="sb-logo">
+        <img src="SpringBoot.png" width="50%" height="50%"/>
     </div>
-    <div class="w3-half w3-center w3-padding-48" id="title">
-        <h1 class="w3-text-black w3-animate-opacity">Environment Info</h1>
+    <div class="w3-half w3-container w3-center w3-padding-16" id="pcf-logo">
+        <img src="PivotalCloudFoundry.png" width="60%" height="60%"/>
+    </div>
+</div>
+
+<div class="w3-row w3-lime">
+    <div class="w3-container w3-center w3-dark-teal" id="title">
+        <H2>Spring Boot Application</H2>
     </div>
 </div>
 
@@ -25,27 +31,27 @@ Font Segoe UI-->
 <div class="w3-row">
     <div class="w3-half w3-teal w3-container w3-center" style="height:600px" id="app">
         <div class="w3-padding-32">
-            <h1>Application Code</h1>
+            <h3>Source Code</h3>
         </div>
         <div class="w3-center">
             <p th:text="'Name: ' + ${@environment.getProperty('spring.application.name')}"/>
-            <p th:each="activeprofile : ${@environment.getActiveProfiles()}"  th:text="'Active Profile: '+${activeprofile}"/>
-            <p th:text="'Version: ' + ${@buildProperties.getVersion()}"/>
+            <p th:each="activeprofile : ${@environment.getActiveProfiles()}"  th:text="'Active Config Profile: '+${activeprofile}"/>
+            <p th:text="'Build Version: ' + ${@buildProperties.getVersion()}"/>
             <p th:text="'Build Date: ' + ${@buildProperties.getTime()}"/>
-            <p th:text="'Branch: ' + ${@gitProperties.getBranch()}"/>
-            <p th:text="'CommitId: ' + ${@gitProperties.getCommitId()}"/>
+            <p th:text="'Build Branch: ' + ${@gitProperties.getBranch()}"/>
+            <p th:text="'Build Commit Id: ' + ${@gitProperties.getCommitId()}"/>
             <p th:text="'Internal Port: ' + ${@environment.getProperty('local.server.port')}"/>
-            <p th:text="'OS: ' + ${@environment.getProperty('os.name')}"/>
+            <p th:text="'Operating System: ' + ${@environment.getProperty('os.name')}"/>
             <p th:text="'Java Runtime: ' + ${@environment.getProperty('java.runtime.name')}"/>
             <p th:text="'Java Variant: ' + ${@environment.getProperty('java.vm.name')}"/>
             <p th:text="'Java Version: ' + ${@environment.getProperty('java.runtime.version')}"/>
-            <a href="/rest" class="w3-button w3-block w3-hover-amber w3-padding-8">[Test Rest Endpoint]</a>
+            <a href="/rest" class="w3-button w3-block w3-hover-amber w3-padding-8">[ Test Endpoint ]</a>
         </div>
     </div>
 
     <div class="w3-half w3-green w3-container w3-center" style="height:600px" id="standard">
         <div class="w3-padding-32">
-            <h1>Actuator</h1>
+            <h3>Actuator Endpoints</h3>
         </div>
         <div class="w3-center">
             <a href="/info" class="w3-button w3-block w3-hover-teal w3-padding-8">/Info</a>
@@ -63,11 +69,17 @@ Font Segoe UI-->
     </div>
 </div>
 
+<div class="w3-row w3-lime">
+    <div class="w3-container w3-center w3-deep-purple" id="sub-title">
+        <H2>Cloud Environment</H2>
+    </div>
+</div>
+
 <!-- Second Row: Cloud and Data Services -->
 <div class="w3-row">
-    <div class="w3-half w3-deep-purple w3-container w3-center" style="min-height:900px" id="cloud">
+    <div class="w3-half w3-purple w3-container w3-center" style="min-height:900px" id="cloud">
         <div class="w3-padding-16">
-            <h1>Cloud Platform</h1>
+            <h3>Cloud Platform</h3>
         </div>
 
         <div th:if="${@environment.acceptsProfiles('cloud')}" class="w3-center">
@@ -125,7 +137,7 @@ Font Segoe UI-->
 
     <div class="w3-half w3-indigo w3-container w3-center" style="min-height:900px" id="cache-services">
         <div class="w3-padding-16">
-            <h1>Attached Services</h1>
+            <h3>Attached Services</h3>
         </div>
 
         <div class="w3-row">
@@ -171,7 +183,7 @@ Font Segoe UI-->
         </div>
         <div class="w3-half w3-center" style="min-height:32px" id="footer-right">
             <form method="POST" th:action="@{/refresh}">
-                <span th:text="'Your host today is: ' + ${@environment.getProperty('your.host.is')}" class="w3-button w3-black w3-block w3-hover-teal w3-padding-small"/>
+                <span th:text="'Your host today was: ' + ${@environment.getProperty('your.host.is')}" class="w3-button w3-black w3-block w3-hover-teal w3-padding-small"/>
                 <button type="submit" name="submit" value="value" class="w3-text-red w3-button w3-black w3-block w3-hover-red w3-padding-small">[ REFRESH THE CONFIG ]</button>
             </form>
         </div>
