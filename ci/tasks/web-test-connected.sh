@@ -9,6 +9,36 @@ if [ -z $URL ]; then
   exit 1
 fi
 
+# Make sure the homepage shows...
+
+if curl -sL -w %{http_code} "$URL" -o /dev/null | grep "200"
+then
+    echo "The website [$URL] shows 'HTTP/1.1 200 OK' (as expected)."
+else
+    echo "Error. Not showing '200 OK' on [$URL]"
+    exit 1
+fi
+
+# Make sure the /info endpoint shows...
+
+if curl -sL -w %{http_code} "$URL/info" -o /dev/null | grep "200"
+then
+    echo "The website [$URL/info] shows 'HTTP Status 200 OK' (as expected)."
+else
+    echo "Error. Not showing '200 OK' on [$URL/info]"
+    exit 1
+fi
+
+# Make sure the /env endpoint shows...
+
+if curl -sL -w %{http_code} "$URL/env" -o /dev/null | grep "200"
+then
+    echo "The website [$URL/env] shows 'HTTP Status 200 OK' (as expected)."
+else
+    echo "Error. Not showing '200 OK' on [$URL/env]"
+    exit 1
+fi
+
 # Make sure the homepage shows there is a DataBase Service bound...
 
 if curl -s "$URL" | grep "MySQL"
