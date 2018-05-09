@@ -5,7 +5,7 @@ metadata:
 data:
   activeprofiles: k8s
   myparameter: my-parameter-value
-  yourhostis: Ben
+  yourhostis: OnMinikube
   vcapapplication: |
     {
       "application_id": "0c9be7ec-ebfe-430d-9294-2ef87f3f3a1b",
