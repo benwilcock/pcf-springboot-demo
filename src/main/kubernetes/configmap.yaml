@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap
+data:
+  activeprofiles: k8s
+  myparameter: my-parameter-value
+  yourhostis: Ben
+  vcapapplication: |
+    {
+      "application_id": "0c9be7ec-ebfe-430d-9294-2ef87f3f3a1b",
+      "application_name": "pcf-springboot-demo",
+      "application_uris": [
+      "pcf-springboot-demo.cfapps.io"
+      ],
+      "application_version": "93f1c5d0-246a-48a3-97da-bf8b641000cc",
+      "cf_api": "https://api.run.pivotal.io",
+      "limits": {
+      "disk": 1024,
+      "fds": 16384,
+      "mem": 1024
+      },
+      "name": "pcf-springboot-demo",
+      "space_id": "7d039255-d45d-4c1b-acbd-5d96ba2d9604",
+      "space_name": "bwilcock",
+      "uris": [
+      "pcf-springboot-demo.cfapps.io"
+      ],
+      "users": null,
+      "version": "93f1c5d0-246a-48a3-97da-bf8b641000cc"
+    }
+

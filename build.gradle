@@ -1,7 +1,8 @@
 plugins {
     id "com.gorylenko.gradle-git-properties" version "1.4.16"
     id "io.spring.dependency-management" version "1.0.2.RELEASE"
-    id 'org.springframework.boot' version '1.5.2.RELEASE'
+    id 'org.springframework.boot' version '1.5.12.RELEASE'
+    id "com.palantir.docker" version "0.19.2"
 }
 
 apply plugin: 'java'
@@ -13,8 +14,10 @@ dependencyManagement {
     }
 }
 
+group = 'benwilcock'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     jcenter()
@@ -40,6 +43,16 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
-springBoot  {
+springBoot {
     buildInfo()
+}
+
+docker {
+    dependsOn build
+    dockerfile file('src/main/docker/Dockerfile')
+    name "${project.group}/${jar.baseName}:${project.version}"
+    tags "${project.version}"
+    files jar.archivePath
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
+    noCache true
 }

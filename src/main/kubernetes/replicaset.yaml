@@ -1,0 +1,63 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: myreplicaset
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: springboot-demo
+        version: "0.0.1-SNAPSHOT"
+    spec:
+      containers:
+      - name: springboot-demo
+        image: benwilcock/pcf-springboot-demo:0.0.1-SNAPSHOT
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env: # Adds an ENV variable from a Kubernetes registered `config map`
+          - name: MY_ENV_PARAMETER # Adds a specific ENV variables with the given `name`
+            valueFrom: 
+              configMapKeyRef:
+                name: myconfigmap # Takes the data from the Kubernetes registered config map called `myconfig`
+                key: myparameter # Gives the variable the value assocuated with this key in the config-map
+          - name: YOUR_HOST_IS
+            valueFrom:
+              configMapKeyRef:
+                name: myconfigmap
+                key: yourhostis
+          - name: SPRING_PROFILES_ACTIVE
+            valueFrom:
+              configMapKeyRef:
+                name: myconfigmap
+                key: activeprofiles
+          - name: VCAP_APPLICATION
+            valueFrom:
+              configMapKeyRef:
+                name: myconfigmap
+                key: vcapapplication
+          - name: VCAP_SERVICES
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: vcap.services
+          - name: DATABASE_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: database.username
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysecret
+                key: database.password
+        volumeMounts:
+          -  name: config-volume # We can also mount the same config-map as a disk volume if we like...
+             mountPath: /config # The data in the config-map will appear under this mount path
+      volumes:
+        -  name: config-volume # Here we are creating the volume that is to be mounted
+           configMap:
+             name: myconfigmap
+      # restartPolicy: never

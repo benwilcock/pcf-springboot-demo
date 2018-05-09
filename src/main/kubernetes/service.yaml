@@ -1,0 +1,18 @@
+# Does not work yet, just keeping it to fix later.
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: springboot-demo
+  name: myservice
+  namespace: default
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: springboot-demo
+  sessionAffinity: None
+  type: NodePort

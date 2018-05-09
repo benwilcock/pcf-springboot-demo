@@ -29,7 +29,7 @@ Font Segoe UI-->
 
 <!-- First Row: Application and Actuator -->
 <div class="w3-row">
-    <div class="w3-half w3-teal w3-container w3-center" style="height:600px" id="app">
+    <div class="w3-half w3-teal w3-container w3-center" style="height:700px" id="app">
         <div class="w3-padding-32">
             <h3>Source Code</h3>
         </div>
@@ -49,7 +49,7 @@ Font Segoe UI-->
         </div>
     </div>
 
-    <div class="w3-half w3-green w3-container w3-center" style="height:600px" id="standard">
+    <div class="w3-half w3-green w3-container w3-center" style="height:700px" id="standard">
         <div class="w3-padding-32">
             <h3>Actuator Endpoints</h3>
         </div>
@@ -59,9 +59,21 @@ Font Segoe UI-->
             <a href="/env" class="w3-button w3-block w3-hover-amber w3-padding-8">/Env</a>
             <a href="/configprops" class="w3-button w3-block w3-hover-amber w3-padding-8">/ConfigProps</a>
             <a href="/beans" class="w3-button w3-block w3-hover-amber w3-padding-8">/Beans</a>
+            <a href="/mappings" class="w3-button w3-block w3-hover-amber w3-padding-8">/Mappings</a>
+            <a href="/scheduledtasks" class="w3-button w3-block w3-hover-amber w3-padding-8">/Scheduledtasks</a>
+            <a href="/sessions" class="w3-button w3-block w3-hover-amber w3-padding-8">/Sessions</a>
             <a href="/metrics" class="w3-button w3-block w3-hover-amber w3-padding-8">/Metrics</a>
             <a href="/loggers" class="w3-button w3-block w3-hover-amber w3-padding-8">/Loggers</a>
             <a href="/trace" class="w3-button w3-block w3-hover-amber w3-padding-8">/Trace</a>
+
+            <div title="This requires a valid UAA token in the header. Check the mappings to see all the sub-endpoints.">
+            <a href="/cloudfoundryapplication" class="w3-button w3-block w3-hover-amber w3-padding-8" >/Cloudfoundryapplication</a>
+            </div>
+
+            <form method="POST" th:action="@{/shutdown}">
+                <div title="This will gracefully shut down the application. Cloud platforms like PCF should restart the applications immediately. Do not resubmit, or you will shutdown the app again!">
+                <button type="submit" name="submit" value="value" class="w3-button w3-block w3-hover-amber w3-padding-8">/Shutdown</button></div>
+            </form>
 
             <small class="w3-button w3-block w3-hover-amber w3-padding-8"
                th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
@@ -130,7 +142,19 @@ Font Segoe UI-->
             </div>
         </div>
 
-        <div th:unless="${@environment.acceptsProfiles('cloud')}" class="w3-center">
+        <div th:if="${@environment.acceptsProfiles('k8s')}" class="w3-center">
+            <img src="PivotalContainerService.png" style="width:50%" class="w3-padding-32"/>
+            <div class="w3-container w3-padding-32">
+                <table class="w3-table w3-center w3-card-4 w3-padding-32">
+                    <tr class="w3-white">
+                        <td class="w3-half w3-right-align">Pod Host Name:</td>
+                        <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('HOSTNAME')}?:'not-found'"/></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div th:unless="${@environment.acceptsProfiles('cloud','k8s')}" class="w3-center">
             <!-- The abscence of this is TESTED FOR in the smoke test! -->
             <p>No Cloud Platform</p>
         </div>
@@ -142,31 +166,31 @@ Font Segoe UI-->
         </div>
 
         <div class="w3-row">
-            <div th:if="${@environment.getProperty('cloud.services.mysql.id')}" class="w3-half w3-center">
+            <div th:if="${@environment.getProperty('vcap.services.mysql.name')}" class="w3-half w3-center">
                 <img src="PcfMySql.png" width="50%" height="50%" class="w3-padding-32"/>
                 <h6>MySQL</h6>
             </div>
-            <div th:if="${@environment.getProperty('cloud.services.redis.id')}" class="w3-half w3-center">
+            <div th:if="${@environment.getProperty('vcap.services.redis.name')}" class="w3-half w3-center">
                 <img src="PcfRedis.png" width="50%" height="50%" class="w3-padding-32"/>
                 <h6>Redis</h6>
             </div>
         </div>
         <div class="w3-row">
-            <div th:if="${@environment.getProperty('cloud.services.rabbit.id')}" class="w3-half w3-center">
+            <div th:if="${@environment.getProperty('vcap.services.rabbit.name')}" class="w3-half w3-center">
                 <img src="PcfRabbitMQ.png" width="50%" height="50%" class="w3-padding-32"/>
                 <h6>Rabbit MQ</h6>
             </div>
-            <div th:if="${@environment.getProperty('cloud.services.config.id')}" class="w3-half w3-center">
+            <div th:if="${@environment.getProperty('vcap.services.config.name')}" class="w3-half w3-center">
                 <img src="PcfConfigServer.png" width="50%" height="50%" class="w3-padding-32"/>
                 <h6>Config Server</h6>
             </div>
         </div>
         <div class="w3-row">
-            <div th:if="${@environment.getProperty('cloud.services.registry.id')}" class="w3-half w3-center">
+            <div th:if="${@environment.getProperty('vcap.services.registry.name')}" class="w3-half w3-center">
                 <img src="PcfRegistryServer.png" width="50%" height="50%" class="w3-padding-32"/>
                 <h6>Service Registry</h6>
             </div>
-            <div th:if="${@environment.getProperty('cloud.services.breaker.id')}" class="w3-half w3-center">
+            <div th:if="${@environment.getProperty('vcap.services.breaker.name')}" class="w3-half w3-center">
                 <img src="PcfCircuitBreakerDashboard.png" width="50%" height="50%" class="w3-padding-32"/>
                 <h6>Circuit Breaker Dashboard</h6>
             </div>

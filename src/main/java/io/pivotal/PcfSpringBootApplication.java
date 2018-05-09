@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +37,7 @@ public class PcfSpringBootApplication {
     @org.springframework.web.bind.annotation.RestController
     class RestController {
 
-        @Value("${spring.application.name}")
+        @Value("${spring.application.name:pcf-springboot-demo}")
         String appName;
 
         @Value("${your.host.is:Ben}")

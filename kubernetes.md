@@ -15,19 +15,14 @@ brew update && brew install kubectl && brew cask install docker minikube virtual
 ```bash
 ./gradlew clean check assemble
 minikube start
-eval $(minikube docker-env))
-docker build -t pcf-springboot-demo:v2 .
-kubectl run --restart=Always --image=pcf-springboot-demo:v2 --port=8080 demo
-kubectl get pods
-kubectl port-forward <pod-name-here> 8080:8080
-kubectl expose deployment demo --type=NodePort
-curl $(minikube service demo --url)
+./k8s-build-image.sh
+./k8s-create-secret.sh
+./k8s-deployment.sh
 ```
 
 ## Cleaning up
 
 ```bash
-kubectl delete service demo
-kubectl delete deployment demo
+kubectl delete -f src/main/kubernetes
 minikube stop
 ```
