@@ -1,20 +1,46 @@
-# Replicas exist to help you make your application highly available.
+# Deployments exist to help manage the release of new versions of your application. 
+# They transcend the application's 'version' and allow you to move easily from one version to another.
+# Deployments support 'rollout' and 'zero-downtime' and can stop deployment if porblems occur.
+# Deployments manage ReplicaSets.
+# Recreate strategy updates the ReplicaSet with the new image and kills existing pods so that they get recreated (downtime).
+# RollingUpdate updates the pods a few at a time while still receiving traffic so there's no downtime.
+# maxUnavailable '25%' means that 25% of the pods will be lost and upgraded at a time.
+# maxSurge '20%' means adding additional capacity temporarily and maintain the existing capacity for the rest of the rollout.
+# Patterns: - maxSurge: 100% is effectively a blue/green deployment as 100% new pods are created and then old pods killed.
+# Patterns: - maxUnavailable: 0% is essentially maintaining the existing capacity and only using surge capacity for the update
+
 apiVersion: extensions/v1beta1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: myreplicaset
+  name: mydeployment
+  namespace: default
+  labels:
+    app: springboot-demo
 spec:
-  replicas: 1
+  replicas: 3
+  revisionHistoryLimit: 10
+  minReadySeconds: 60 # wait until the first pod has been healthy for 60 seconds before rolling out the next one
+  progressDeadlineSeconds: 300 # should take no more than 300 seconds per individual pod, otherwise fail the deployment.
+  selector:
+    matchLabels:
+      app: springboot-demo
+  strategy: # One of Recreate or RollingUpdate.
+    rollingUpdate:
+      maxSurge: 1 # adds additional pods temporarily so we can maintain our existing capacity (can be %)
+      maxUnavailable: 1 # specifies how many pods can be killed and upgraded at a time (can be %).
+    type: RollingUpdate
   template:
     metadata:
+      annotations:
+        kubernetes.io/change-cause: "Deploying to 0.0.1" # Update reason shows up in 'kubectl rollout history deployments xxx'
       labels:
         app: springboot-demo
-        version: "0.0.1-SNAPSHOT"
+        version: "0.0.1-SNAPSHOT" # This is just a label, changing it doesn't update the running version
     spec:
       containers:
       - name: springboot-demo
-        image: benwilcock/pcf-springboot-demo:0.0.1-SNAPSHOT
-        imagePullPolicy: IfNotPresent
+        image: benwilcock/pcf-springboot-demo:0.0.1-SNAPSHOT # You can change versions here
+        imagePullPolicy: IfNotPresent # Can be 'Always' by default.
         ports:
         - containerPort: 8080
           protocol: TCP

@@ -1,18 +1,14 @@
-# Does not work yet, just keeping it to fix later.
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    run: springboot-demo
   name: myservice
-  namespace: default
 spec:
-  externalTrafficPolicy: Cluster
+  type: NodePort
   ports:
-  - port: 8080
+  - port: 80
     protocol: TCP
     targetPort: 8080
   selector:
-    run: springboot-demo
+    app: springboot-demo
+  externalTrafficPolicy: Cluster
   sessionAffinity: None
-  type: NodePort

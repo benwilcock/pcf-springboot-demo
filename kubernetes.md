@@ -15,9 +15,10 @@ brew update && brew install kubectl && brew cask install docker minikube virtual
 ```bash
 ./gradlew clean check assemble
 minikube start
-./k8s-build-image.sh
-./k8s-create-secret.sh
-./k8s-deployment.sh
+./k8s-build.sh
+./k8s-configure.sh
+./k8s-deploy.sh
+kubectl rollout history deployment mydeployment
 ```
 
 ## Cleaning up
