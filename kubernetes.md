@@ -1,4 +1,4 @@
-# Running the demo app on Kubernetes
+# Running the demo app on Kubernetes (Minikube)
 
 You can use this same SpringBoot Demo app to test a couple of Kubernetes features without much work.
 
@@ -26,15 +26,21 @@ eval $(minikube docker-env)
 ./k8s-watch.sh
 ```
 
-## Perform an application rollout
+## Perform an application rollout in Kubernetes
 
-To change the application version you have installed, first build an image for the new version by editing the `build.gradle` file. Then change the `src/main/kubernetes/deployment.yaml` to match your new image. Then apply the change as shown below. Doing so will perform an upgrade (or downgrade) based on the strategy and settings in your `deployment.yaml`.
+To perform an upgrade (or downgrade) based on the strategy and settings in your `deployment.yaml` follow these steps...
+
+1. Build a new Docker image for the new app version by editing the `build.gradle` file.
+1. Change the `src/main/kubernetes/deployment.yaml` kubernetes manifest to match your new image name (and add a reson for the history).
+1. Apply the change in kubernetes using `kubectl` as shown below... 
 
 ```bash
 ./k8s-build.sh
 kubectl apply -f src/main/kubernetes/deployment.yaml
 kubectl rollout history deployment mydeployment
 ```
+
+If you go with the defaults I've set, Kubernetes will perform a blue/green deployment of your new version, checking for health as it goes.
 
 ## Interacting with a running Pod in Kubernetes
 
