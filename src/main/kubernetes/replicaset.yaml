@@ -1,8 +1,8 @@
 # Replicas exist to help you make your application highly available.
-apiVersion: extensions/v1beta1
-kind: ReplicaSet
-metadata:
-  name: myreplicaset
+# apiVersion: extensions/v1beta1
+# kind: ReplicaSet
+# metadata:
+#   name: myreplicaset
 spec:
   replicas: 1
   template:
