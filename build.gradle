@@ -32,8 +32,10 @@ dependencies {
 
     // Database (Required by SCS Connector if DB is bound to app in PCF)
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
-	// compile('com.h2database:h2')
-    compile('mysql:mysql-connector-java:5.1.46')
+    compile('com.h2database:h2')
+    // Uncomment this next MySQL dependency for Docker/Kubernetes or you'll get the wrong Driver.
+    // CloudFoundry buildpack will add this automatically if it spots the MySQL service binding.
+    // compile('mysql:mysql-connector-java:5.1.46')
 
 
     // Spring Cloud
