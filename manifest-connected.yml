@@ -1,7 +1,9 @@
+---
 applications:
 - name: pcf-springboot-demo
   timeout: 180
   memory: 1G
+  random-route: true
   disk_quota: 1G
   path: build/libs/pcf-springboot-demo-0.0.1-SNAPSHOT.jar
   services:
@@ -9,8 +11,8 @@ applications:
     - rabbit
     - config
     - registry
-    - redis
-    - breaker
+  #  - redis
+  #  - breaker
 
 #  env:
 #    JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=n,address=2.101.163.21:5005

@@ -35,7 +35,7 @@ dependencies {
     compile('com.h2database:h2')
     // Uncomment this next MySQL dependency for Docker/Kubernetes or you'll get the wrong Driver.
     // CloudFoundry buildpack will add this automatically if it spots the MySQL service binding.
-    // compile('mysql:mysql-connector-java:5.1.46')
+    compile('mysql:mysql-connector-java:5.1.46')
 
 
     // Spring Cloud
