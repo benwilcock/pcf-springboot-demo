@@ -11,7 +11,7 @@ params:
   URL:
 
 inputs:
-- name: pcf-springboot-demo-source
+- name: code
 
 run:
-  path: pcf-springboot-demo-source/ci/tasks/web-test-disconnected.sh
+  path: code/ci/tasks/web-test-disconnected.sh
