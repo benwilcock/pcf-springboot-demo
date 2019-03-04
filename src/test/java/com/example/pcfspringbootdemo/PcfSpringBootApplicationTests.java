@@ -1,4 +1,4 @@
-package io.pivotal;
+package com.example.pcfspringbootdemo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
