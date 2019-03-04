@@ -4,10 +4,10 @@ set -ex
 
 pushd pcf-springboot-demo-source
   echo "Fetching Dependencies & Building Code..."
-  ./gradlew assemble > /dev/null
+  ./mvnw compile > /dev/null
 
   echo "Running Tests..."
-  ./gradlew test
+  ./mvnw test
 popd
 
 exit 0
