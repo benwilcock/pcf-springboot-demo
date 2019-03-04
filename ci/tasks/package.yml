@@ -8,11 +8,11 @@ image_resource:
     tag: "8"
 
 inputs:
-- name: pcf-springboot-demo-source
+- name: code
 
 outputs:
 - name: package-output
 
 run:
-  path: pcf-springboot-demo-source/ci/tasks/package.sh
+  path: code/ci/tasks/package.sh
 
