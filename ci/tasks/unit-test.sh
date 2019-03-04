@@ -2,7 +2,7 @@
 
 set -ex
 
-pushd pcf-springboot-demo-source
+pushd code
   echo "Fetching Dependencies & Building Code..."
   ./mvnw compile > /dev/null
 
