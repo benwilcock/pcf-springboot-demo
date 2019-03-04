@@ -7,7 +7,7 @@ resource_types:
     tag: latest
 
 resources:
-- name: pcf-springboot-demo-source
+- name: code
   type: git
   source:
     uri: https://github.com/benwilcock/pcf-springboot-demo
@@ -37,56 +37,56 @@ jobs:
 - name: unit-test
   public: true
   plan:
-  - get: pcf-springboot-demo-source
+  - get: code
     trigger: true
   - get: timer
     trigger: true
   - task: test
-    file: pcf-springboot-demo-source/ci/tasks/unit-test.yml
+    file: code/ci/tasks/unit-test.yml
 
 - name: push-connected
   public: true
   plan:
-  - get: pcf-springboot-demo-source
+  - get: code
     trigger: true
     passed: [unit-test]
   - get: timer
     trigger: true
     passed: [unit-test]
   - task: package
-    file: pcf-springboot-demo-source/ci/tasks/package.yml
+    file: code/ci/tasks/package.yml
   - put: push-to-pcf
     params:
-      manifest: pcf-springboot-demo-source/manifest-connected.yml
+      manifest: code/manifest-connected.yml
       path: package-output/pcf-springboot-demo.jar
 
 - name: push-disconnected
   public: true
   plan:
-  - get: pcf-springboot-demo-source
+  - get: code
     trigger: true
     passed: [unit-test]
   - get: timer
     trigger: true
     passed: [unit-test]
   - task: package
-    file: pcf-springboot-demo-source/ci/tasks/package.yml
+    file: code/ci/tasks/package.yml
   - put: push-to-pcf
     params:
-      manifest: pcf-springboot-demo-source/manifest-disconnected.yml
+      manifest: code/manifest-disconnected.yml
       path: package-output/pcf-springboot-demo.jar
 
 - name: test-connected
   public: true
   plan:
-  - get: pcf-springboot-demo-source
+  - get: code
     trigger: true
     passed: [push-connected]
   - get: timer
     trigger: true
     passed: [push-connected]
   - task: test-disconnected
-    file: pcf-springboot-demo-source/ci/tasks/web-test-connected.yml
+    file: code/ci/tasks/web-test-connected.yml
     params:
       URL: http://pcf-springboot-demo.cfapps.io
   - put: slack-alert
@@ -97,14 +97,14 @@ jobs:
 - name: test-disconnected
   public: true
   plan:
-  - get: pcf-springboot-demo-source
+  - get: code
     trigger: true
     passed: [push-disconnected]
   - get: timer
     trigger: true
     passed: [push-disconnected]
   - task: test-disconnected
-    file: pcf-springboot-demo-source/ci/tasks/web-test-disconnected.yml
+    file: code/ci/tasks/web-test-disconnected.yml
     params:
       URL: http://pcf-springboot-demo-disconnected.cfapps.io
   - put: slack-alert
