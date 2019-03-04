@@ -39,6 +39,7 @@ Font Segoe UI-->
                     <td class="w3-half w3-right-align"><b>Application Name:</b></td>
                     <td class="w3-half w3-left-align"><span th:text="${@environment.getProperty('spring.application.name')}"/></td>
                 </tr>
+
                 <tr class="w3-lime">
                     <td class="w3-half w3-right-align"><b>Build Version:</b></td>
                     <td class="w3-half w3-left-align"><span th:text="${@buildProperties.getVersion()}"/></td>
@@ -100,37 +101,31 @@ Font Segoe UI-->
             <h3>Actuator Endpoints</h3>
         </div>
         <div class="w3-center w3-card-4">
-            <a href="/actuator" class="w3-button w3-block w3-hover-teal w3-padding-8">/Actuator (all actuator endpoints)</a>
-            <a href="/actuator/info" class="w3-button w3-block w3-hover-teal w3-padding-8">/Info (application info, inc. build)</a>
-            <a href="/actuator/health" class="w3-button w3-block w3-hover-teal w3-padding-8">/Health (application health, inc. DB etc.)</a>
-            <a href="/actuator/env" class="w3-button w3-block w3-hover-amber w3-padding-8">/Env (all environment variables)</a>
-            <a href="/actuator/caches" class="w3-button w3-block w3-hover-amber w3-padding-8">/Caches (all cache managers)</a>
-            <a href="/actuator/configprops" class="w3-button w3-block w3-hover-amber w3-padding-8">/ConfigProps (all configuration properties)</a>
-            <a href="/actuator/conditions" class="w3-button w3-block w3-hover-amber w3-padding-8">/Conditions (all evaluated startup conditions)</a>
-            <a href="/actuator/beans" class="w3-button w3-block w3-hover-amber w3-padding-8">/Beans (all defined Spring beans)</a>
-            <a href="/actuator/mappings" class="w3-button w3-block w3-hover-amber w3-padding-8">/Mappings (all defined endpoints)</a>
-            <a href="/actuator/scheduledtasks" class="w3-button w3-block w3-hover-amber w3-padding-8">/Scheduledtasks (all defined scheduled tasks)</a>
-            <a href="/actuator/metrics" class="w3-button w3-block w3-hover-amber w3-padding-8">/Metrics (exposed metrics)</a>
-            <a href="/actuator/loggers" class="w3-button w3-block w3-hover-amber w3-padding-8">/Loggers (all loggers and levels)</a>
-            <a href="/actuator/heapdump" class="w3-button w3-block w3-hover-amber w3-padding-8">/HeapDump (Download a Head dump)</a>
-            <a href="/actuator/threaddump" class="w3-button w3-block w3-hover-amber w3-padding-8">/ThreadDump (all threads & status)</a>
-            <a href="/actuator/features" class="w3-button w3-block w3-hover-amber w3-padding-8">/Features (all enabled and disabled)</a>
-            <a href="/actuator/auditevents" class="w3-button w3-block w3-hover-amber w3-padding-8">/AuditEvents (all events)</a>
+            <a href="/actuator" class="w3-button w3-block w3-hover-teal w3-padding-8"><b>/Actuator</b> (all actuator endpoints)</a>
+            <a href="/actuator/info" class="w3-button w3-block w3-hover-teal w3-padding-8"><b>/Info</b> (application info, inc. build)</a>
+            <a href="/actuator/health" class="w3-button w3-block w3-hover-teal w3-padding-8"><b>/Health</b> (application health, inc. DB etc.)</a>
+            <a href="/actuator/env" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Env</b> (all environment variables)</a>
+            <a href="/actuator/caches" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Caches</b> (all cache managers)</a>
+            <a href="/actuator/configprops" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/ConfigProps</b> (all configuration properties)</a>
+            <a href="/actuator/conditions" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Conditions</b> (all evaluated startup conditions)</a>
+            <a href="/actuator/beans" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Beans</b> (all defined Spring beans)</a>
+            <a href="/actuator/mappings" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Mappings</b> (all defined endpoints)</a>
+            <a href="/actuator/scheduledtasks" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Scheduledtasks</b> (all defined scheduled tasks)</a>
+            <a href="/actuator/metrics" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Metrics</b> (exposed metrics)</a>
+            <a href="/actuator/loggers" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Loggers</b> (all loggers and levels)</a>
+            <a href="/actuator/heapdump" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/HeapDump</b> (Download a Head dump)</a>
+            <a href="/actuator/threaddump" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/ThreadDump</b> (all threads & status)</a>
+            <a href="/actuator/features" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Features</b> (all enabled and disabled)</a>
+            <a href="/actuator/auditevents" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/AuditEvents</b> (all events)</a>
 
-
-<!--            <a href="/actuator/sessions" class="w3-button w3-block w3-hover-amber w3-padding-8">/Sessions</a>-->
-<!--            <a href="/actuator/trace" class="w3-button w3-block w3-hover-amber w3-padding-8">/Trace</a>-->
-<!--            <div title="This requires a valid UAA token in the header. Check the mappings to see all the sub-endpoints.">-->
-<!--                <a href="/cloudfoundryapplication" class="w3-button w3-block w3-hover-amber w3-padding-8" >/Cloudfoundryapplication</a>-->
-<!--            </div>-->
 <!--            <form method="POST" th:action="@{/shutdown}">-->
 <!--                <div title="This will gracefully shut down the application. Cloud platforms like PCF should restart the applications immediately. Do not resubmit, or you will shutdown the app again!">-->
 <!--                <button type="submit" name="submit" value="value" class="w3-button w3-block w3-hover-amber w3-padding-8">/Shutdown</button></div>-->
 <!--            </form>-->
 
-            <small class="w3-button w3-block w3-hover-amber w3-padding-8"
-               th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
         </div>
+        <small class="w3-padding-32"
+               th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
     </div>
 </div>
 
