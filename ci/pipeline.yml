@@ -88,7 +88,7 @@ jobs:
   - task: test-disconnected
     file: code/ci/tasks/web-test-connected.yml
     params:
-      URL: http://pcf-springboot-demo.cfapps.io
+      URL: http://pcf-springboot-demo-connected.cfapps.io
   - put: slack-alert
     params:
       text: |
