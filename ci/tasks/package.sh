@@ -3,8 +3,8 @@
 set -e +x
 
 pushd code
-  echo "Packaging JAR"
-  ./mvnw package
+  echo "Building and packaging the application JAR with Maven..."
+  ./mvnw package -Pcloud
 popd
 
 jar_count=`find code/target -type f -name *.jar | wc -l`
