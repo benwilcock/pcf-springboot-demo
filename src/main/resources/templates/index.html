@@ -57,7 +57,7 @@ Font Segoe UI-->
 
                 <tr class="w3-lime">
                     <td class="w3-half w3-right-align"><b>Build Commit Id:</b></td>
-                    <td class="w3-half w3-left-align"><span th:text="${@gitProperties.getCommitId()}"/></td>
+                    <td class="w3-half w3-left-align"><span th:text="${@gitProperties.getShortCommitId()}"/></td>
                 </tr>
 
                 <tr class="w3-lime">
@@ -115,7 +115,6 @@ Font Segoe UI-->
             <a href="/actuator/loggers" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Loggers</b> (all loggers and levels)</a>
             <a href="/actuator/heapdump" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/HeapDump</b> (Download a Head dump)</a>
             <a href="/actuator/threaddump" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/ThreadDump</b> (all threads & status)</a>
-            <a href="/actuator/features" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/Features</b> (all enabled and disabled)</a>
             <a href="/actuator/auditevents" class="w3-button w3-block w3-hover-amber w3-padding-8"><b>/AuditEvents</b> (all events)</a>
 
 <!--            <form method="POST" th:action="@{/shutdown}">-->
@@ -124,8 +123,7 @@ Font Segoe UI-->
 <!--            </form>-->
 
         </div>
-        <small class="w3-padding-32"
-               th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
+        <small class="w3-padding-16" th:text="'Secured: ' + ${@environment.getProperty('management.security.enabled')}"/>
     </div>
 </div>
 
