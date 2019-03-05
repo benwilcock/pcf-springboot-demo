@@ -19,23 +19,23 @@ else
     exit 1
 fi
 
-# Make sure the /info endpoint shows...
+# Make sure the /actuator/info endpoint shows...
 
-if curl -sL -w %{http_code} "$URL/info" -o /dev/null | grep "200"
+if curl -sL -w %{http_code} "$URL/actuator/info" -o /dev/null | grep "200"
 then
-    echo "The website [$URL/info] shows 'HTTP Status 200 OK' (as expected)."
+    echo "The website [$URL/actuator/info] shows 'HTTP Status 200 OK' (as expected)."
 else
-    echo "Error. Not showing '200 OK' on [$URL/info]"
+    echo "Error. Not showing '200 OK' on [$URL/actuator/info]"
     exit 1
 fi
 
-# Make sure the /env endpoint shows...
+# Make sure the /actuator/env endpoint shows...
 
-if curl -sL -w %{http_code} "$URL/env" -o /dev/null | grep "200"
+if curl -sL -w %{http_code} "$URL/actuator/env" -o /dev/null | grep "200"
 then
-    echo "The website [$URL/env] shows 'HTTP Status 200 OK' (as expected)."
+    echo "The website [$URL/actuator/env] shows 'HTTP Status 200 OK' (as expected)."
 else
-    echo "Error. Not showing '200 OK' on [$URL/env]"
+    echo "Error. Not showing '200 OK' on [$URL/actuator/env]"
     exit 1
 fi
 
@@ -56,7 +56,7 @@ then
     echo "The website [$URL] shows an 'Instance GUID' (this was expected)."
 
 else
-    echo "The website [$URL] does not show 'No Cloud Platform' (this was unexpected)."
+    echo "The website [$URL] does not show 'Instance GUID' (this was unexpected)."
     exit 1
 fi
 
