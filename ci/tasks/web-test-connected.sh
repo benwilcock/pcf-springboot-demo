@@ -71,33 +71,33 @@ fi
 
 # Make sure the homepage shows there is a Registry Service bound...
 
-if curl -s "$URL" | grep "Service Registry"
-then
-    echo "The website [$URL] shows 'Registry' (as expected)."
-else
-    echo "Error. Not showing 'Registry' on [$URL]"
-    exit 1
-fi
+# if curl -s "$URL" | grep "Service Registry"
+# then
+#     echo "The website [$URL] shows 'Registry' (as expected)."
+# else
+#     echo "Error. Not showing 'Registry' on [$URL]"
+#     exit 1
+# fi
 
 # Make sure the homepage shows there is a Config Service bound...
 
-if curl -s "$URL" | grep "Config Server"
-then
-    echo "The website [$URL] shows 'Config' (as expected)."
-else
-    echo "Error. Not showing 'Config' on [$URL]"
-    exit 1
-fi
+# if curl -s "$URL" | grep "Config Server"
+# then
+#     echo "The website [$URL] shows 'Config' (as expected)."
+# else
+#     echo "Error. Not showing 'Config' on [$URL]"
+#     exit 1
+# fi
 
 # Make sure the homepage shows there is a Circuit Breaker Dashboard bound...
 
-if curl -s "$URL" | grep "Circuit Breaker Dashboard"
-then
-    echo "The website [$URL] shows 'Circuit Breaker Dashboard' (as expected)."
-else
-    echo "Error. Not showing 'Circuit Breaker Dashboard' on [$URL]"
-    exit 1
-fi
+# if curl -s "$URL" | grep "Circuit Breaker Dashboard"
+# then
+#     echo "The website [$URL] shows 'Circuit Breaker Dashboard' (as expected)."
+# else
+#     echo "Error. Not showing 'Circuit Breaker Dashboard' on [$URL]"
+#     exit 1
+# fi
 
 # Make sure the homepage shows there is a Cloud Platform present...
 
