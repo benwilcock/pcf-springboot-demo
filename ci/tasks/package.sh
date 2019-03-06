@@ -4,7 +4,7 @@ set -e +x
 
 pushd code
   echo "Building and packaging the application JAR with Maven..."
-  ./mvnw package -Pcloud -DskipTests=true
+  mvn package -Pcloud -DskipTests=true
 popd
 
 jar_count=`find code/target -type f -name *.jar | wc -l`
