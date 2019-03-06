@@ -54,7 +54,7 @@ jobs:
     trigger: true
     passed: [unit-test]
   - task: package
-    file: code/ci/tasks/package.yml
+    file: code/ci/tasks/package-connected.yml
   - put: push-to-pcf
     params:
       manifest: code/manifest-connected.yml
@@ -70,7 +70,7 @@ jobs:
     trigger: true
     passed: [unit-test]
   - task: package
-    file: code/ci/tasks/package.yml
+    file: code/ci/tasks/package-disconnected.yml
   - put: push-to-pcf
     params:
       manifest: code/manifest-disconnected.yml
